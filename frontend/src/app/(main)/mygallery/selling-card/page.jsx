@@ -30,8 +30,7 @@ export default function MyGallerySellingPage() {
 
   const { setOwnedCount, setTitle } = useMyGalleryCount();
 
-  // ✅ env
-  // ✅ 반드시 Netlify env를 이렇게 설정: https://be-1-yqrf.onrender.com/api
+  // NEXT_PUBLIC_API_BASE_URL = BE Origin (슬래시 없음, /api 미포함)
   const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || '').replace(/\/$/, '');
   // ✅ 이미지/정적파일은 보통 /api 없이 서빙됨 → origin 분리
   const ORIGIN_BASE = useMemo(() => API_BASE.replace(/\/api$/, ''), [API_BASE]);
@@ -153,8 +152,7 @@ export default function MyGallerySellingPage() {
         const cursorToUse = cursorOverride !== undefined ? cursorOverride : nextCursor;
         if (cursorToUse) qs.set('cursor', String(cursorToUse));
 
-        // ✅ env에 /api 포함이므로 그냥 /listings만 붙이면 됨
-        const url = `${API_BASE}/listings?${qs.toString()}`;
+        const url = `${API_BASE}/api/listings?${qs.toString()}`;
 
         const res = await fetch(url, { credentials: 'include' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
