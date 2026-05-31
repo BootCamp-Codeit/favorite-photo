@@ -19,6 +19,21 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 /**
+ * POST /users/signup
+ * Body: { email, nickname, password }
+ */
+export async function signup(req, res, next) {
+  try {
+    const { email, nickname, password } = req.body || {};
+    const user = await userService.createUser({ email, nickname, password });
+    return res.status(201).json({ user });
+  } catch (err) {
+    err.status = err.status ?? err.code ?? 500;
+    next(err);
+  }
+}
+
+/**
  * POST /users/login
  * Body: { email, password }
  * On success: set JWT in httpOnly cookie, return { user }
