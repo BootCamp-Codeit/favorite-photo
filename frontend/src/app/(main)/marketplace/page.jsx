@@ -82,7 +82,7 @@ function sortParamsFromKey(sort) {
 function statusParamFromSoldout(soldout) {
   if (soldout === 'soldout') return 'SOLD_OUT';
   if (soldout === 'available') return 'ACTIVE';
-  return 'ALL';
+  return null;
 }
 
 export default function MarketplacePage() {
@@ -128,13 +128,29 @@ export default function MarketplacePage() {
           limit: String(LISTINGS_LIMIT),
           sortBy,
           sortOrder,
-          status: statusParamFromSoldout(soldoutFilter),
         });
+        const status = statusParamFromSoldout(soldoutFilter);
+        if (status) params.set('status', status);
+        else params.set('status', 'ALL');
         if (cursor != null) params.set('cursor', String(cursor));
 
-        const res = await http.get(`/api/listings?${params.toString()}`);
-        const data = res.data?.data;
-        const items = data?.items ?? [];
+        let res = await http.get(`/api/listings?${params.toString()}`);
+        let data = res.data?.data;
+        let items = data?.items ?? [];
+
+        // BE 배포 전 status=ALL 미지원 시 ACTIVE(기본)로 폴백
+        if (
+          items.length === 0 &&
+          soldoutFilter === 'all' &&
+          cursor == null &&
+          params.get('status') === 'ALL'
+        ) {
+          params.delete('status');
+          res = await http.get(`/api/listings?${params.toString()}`);
+          data = res.data?.data;
+          items = data?.items ?? [];
+        }
+
         const next = data?.nextCursor ?? null;
         const cards = items.map(listingToCard);
 
