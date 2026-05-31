@@ -1,0 +1,175 @@
+.pageContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #000000;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.backButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+.headerSpacer {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cardTitleBox {
+  width: 100%;
+  border-bottom: 1px solid #5a5a5a;
+  padding-bottom: 12px;
+}
+
+.cardTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.sectionTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.photoSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.photoImage {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+}
+
+.detailsSection {
+  width: 100%;
+}
+
+.gradeSection,
+.genreSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.descriptionSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actionButtons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.cancelButton {
+  flex: 1;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.cancelButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.saveButton {
+  flex: 1;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  background-color: #ffff00;
+  color: #000000;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.saveButton:hover {
+  opacity: 0.9;
+}
+
+@media (min-width: 500px) {
+  .cardTitle,
+  .sectionTitle {
+    font-size: 40px;
+  }
+}

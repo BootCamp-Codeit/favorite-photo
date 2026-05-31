@@ -1,0 +1,71 @@
+/* src/app/globals.css
+   created by Myeonghwan Kim
+   font-face 추가 added by Taeyoung, 1/21/2026
+*/
+
+@import 'tailwindcss';
+
+/* ================================
+   Fonts
+================================ */
+
+@font-face {
+  font-family: 'BR B';
+  src: url('/fonts/BR-B.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ================================
+   Base layout reset
+================================ */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* Ensure predictable sizing everywhere */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ================================
+   ResponsiveButton visibility
+================================ */
+
+/* Primary on desktop (≥1200px), Secondary on tablet/mobile */
+
+.rb-desktop-only {
+  display: none !important;
+}
+
+.rb-mobile-only {
+  display: inline-flex !important;
+}
+
+@media (min-width: 1200px) {
+  .rb-desktop-only {
+    display: inline-flex !important;
+  }
+
+  .rb-mobile-only {
+    display: none !important;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}

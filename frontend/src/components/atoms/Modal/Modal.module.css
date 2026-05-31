@@ -1,0 +1,142 @@
+/* Modal.module.css */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px; /* 화면 가장자리 안전 여백 */
+}
+
+.overlayBottomSheet {
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
+}
+
+/* Full-height bottom sheet: 20px from top, edge-to-edge left/right/bottom (포토카드 교환하기) */
+.overlayBottomSheetFull {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 0 0 0; /* only top margin; left, right, bottom touch screen edges */
+}
+
+.bottomSheet {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 12px 12px 0 0;
+  border-bottom: none;
+  box-sizing: border-box;
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Edge-to-edge: flush with screen left, right, and bottom */
+.bottomSheetFull {
+  width: 100%;
+  min-width: 100%;
+  max-width: none;
+  height: calc(100vh - 20px);
+  max-height: calc(100vh - 20px);
+  border-radius: 12px 12px 0 0;
+  border: none;
+  border-bottom: none;
+  box-sizing: border-box;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+
+  width: 560px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100dvh - 48px);
+
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+.custom {
+  width: 1160px;
+  height: 1000px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100dvh - 48px);
+}
+
+.customNoBorder {
+  width: 1160px;
+  height: 1000px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100dvh - 48px);
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: #141414 !important;
+}
+
+.purchaseConfirm {
+  width: 560px;
+  height: 352px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100dvh - 48px);
+}
+
+.exchangeCancelConfirm {
+  width: 560px;
+  height: 355px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100dvh - 48px);
+  background: #161616 !important;
+}
+
+.content {
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+}

@@ -1,0 +1,94 @@
+.purchaseModalContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px 40px 40px;
+  box-sizing: border-box;
+  gap: 0;
+  position: relative;
+}
+
+.title {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 60px;
+}
+
+.message {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 60px;
+}
+
+.errorMessage {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #ff6b6b;
+  text-align: center;
+  margin: 0 0 16px 0;
+  padding: 0;
+}
+
+.testBuyerRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.testBuyerLabel {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.testBuyerInput {
+  width: 64px;
+  padding: 6px 8px;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.testHint {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin: 0 0 12px 0;
+}
+
+.loginHint {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin: 0 0 16px 0;
+}
+
+.purchaseButton {
+  width: 170px;
+  height: 60px;
+  flex-shrink: 0;
+}

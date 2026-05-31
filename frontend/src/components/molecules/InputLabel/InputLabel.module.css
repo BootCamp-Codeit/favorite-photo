@@ -1,0 +1,19 @@
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+}
+
+/* 에러 상태 */
+.error {
+  border-color: #ef4444;
+}
+
+.errorMessage {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ef4444;
+}

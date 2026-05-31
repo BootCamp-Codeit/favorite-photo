@@ -1,0 +1,65 @@
+/* 1199px 이상: 한 줄에 3개 (3 cols) */
+/* ~1198px: 한 줄에 2개 (2 cols) */
+/* Mobile (<= 499px): 간격 축소, padding-bottom for fixed sell button */
+.listWrapper {
+  box-sizing: border-box;
+}
+
+@media (max-width: 499px) {
+  .listWrapper {
+    padding-top: 10px !important;
+    padding-bottom: 16px; /* space for fixed bottom sell button */
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 72px;
+  row-gap: 80px;
+  justify-items: center;
+}
+
+@media (min-width: 1199px) {
+  .cardGrid {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 72px;
+    row-gap: 80px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cardGrid {
+    column-gap: 48px;
+    row-gap: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardGrid {
+    column-gap: 32px;
+    row-gap: 40px;
+  }
+}
+
+@media (max-width: 499px) {
+  .cardGrid {
+    column-gap: 8px;
+    row-gap: 16px;
+  }
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  place-self: center;
+}
+
+.sentinel {
+  height: 1px;
+  width: 100%;
+  pointer-events: none;
+  visibility: hidden;
+}

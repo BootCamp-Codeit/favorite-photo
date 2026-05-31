@@ -1,0 +1,231 @@
+/* Desktop (>= 500px): show; Mobile (<= 499px): hide */
+.desktop {
+  display: block;
+}
+
+@media (max-width: 499px) {
+  .desktop {
+    display: none !important;
+  }
+}
+
+/* Mobile (<= 499px): show; Desktop: hide */
+.mobile {
+  display: none;
+}
+
+@media (max-width: 499px) {
+  .mobile {
+    display: block;
+  }
+}
+
+.mobileSearchWrap {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobileSearchInput {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ffffff;
+}
+
+.divider {
+  display: block;
+  width: 90%;
+  height: 0;
+  border: none;
+  border-top: 1px solid #5a5a5a;
+  margin: 0 auto;
+}
+
+.mobileFilterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.filterIconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.filterIconBtn:hover {
+  opacity: 0.8;
+}
+
+.sortWrap {
+  flex: 1;
+  min-width: 0;
+  max-width: 160px;
+}
+
+/* Mobile (<= 499px): 하단 고정 판매 버튼 */
+.fixedBottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  background: #000;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sellBtnFixed {
+  max-width: 100%;
+}
+
+/* Mobile: yellow sell button in fixed bottom */
+@media (max-width: 499px) {
+  .fixedBottom .sellBtnFixed :global(button) {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border: none;
+  }
+}
+
+/* 판매 버튼: 포토카드 컴포넌트 너비(430px)와 동일하게 제한 */
+.sellBtnWrap {
+  flex-shrink: 0;
+}
+.sellBtn {
+  background: #ffff00;
+  width: 430px;
+  max-width: 430px;
+  box-sizing: border-box;
+}
+/* 500~800px: 버튼 70% 크기(301px), 화면 벗어나지 않도록 max-width: 100% */
+@media (max-width: 800px) and (min-width: 500px) {
+  .sellBtnWrap {
+    flex-shrink: 1;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .sellBtn {
+    width: 301px; /* 430 * 0.7 */
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Tablet: sell button font color black */
+@media (min-width: 500px) and (max-width: 1199px) {
+  .sellBtn :global(button) {
+    color: #000000 !important;
+  }
+}
+
+/* Title과 버튼 행: 500px 이상에서 같은 줄, wrap 방지 */
+.titleButtonRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  min-width: 0;
+  gap: 8px;
+}
+.titleButtonRow .titleWrap {
+  flex-shrink: 0;
+}
+.titleButtonRow .sellBtnWrap {
+  flex-shrink: 0;
+}
+/* 500~800px: 버튼 영역은 줄어들 수 있게 */
+@media (max-width: 800px) and (min-width: 500px) {
+  .titleButtonRow .sellBtnWrap {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+}
+
+/* 마켓플레이스 Title: 500~800px 구간에서 70% 크기 */
+.titleWrap {
+  display: inline-block;
+  white-space: nowrap;
+}
+@media (max-width: 800px) and (min-width: 500px) {
+  .titleWrap {
+    transform: scale(0.7);
+    transform-origin: left center;
+  }
+}
+
+/* 데스크톱 필터 영역 */
+.desktopFilterArea {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  row-gap: 0;
+}
+.desktopFilterArea .desktopSearchWrap {
+  margin-right: 4px;
+}
+
+.desktopDropdownsRow {
+  display: flex;
+  align-items: center;
+  gap: 0 4px;
+}
+.desktopDropdownsRow > .desktopDropdownItem {
+  padding: 0;
+}
+.desktopDropdownsRow > .desktopDropdownItem:nth-child(1) {
+  width: 120px;
+  flex-shrink: 0;
+}
+.desktopDropdownsRow > .desktopDropdownItem:nth-child(2) {
+  width: 120px;
+  flex-shrink: 0;
+}
+.desktopDropdownsRow > .desktopDropdownItem:nth-child(3) {
+  width: 140px;
+  flex-shrink: 0;
+}
+/* 3개 DropDown 내부 select 패딩 최소화 */
+.desktopDropdownsRow .desktopDropdownItem select {
+  padding: 6px 36px 6px 6px;
+  min-height: 38px;
+  height: 38px;
+}
+
+.desktopSortWrap {
+  width: 160px;
+  flex-shrink: 0;
+}
+
+/* 500px 이상: 검색 60%, 3개 DropDown이 검색박스와 낮은 가격순 사이에 위치, 한 줄 유지 */
+@media (min-width: 500px) {
+  .desktopFilterArea {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .desktopFilterArea .desktopSearchWrap {
+    flex: 0 1 auto;
+    width: 60%;
+    max-width: 60%;
+    min-width: 0;
+  }
+}
+
+/* 데스크톱 검색입력: 500px 이상에서 60% */
+.desktopSearchWrap {
+  flex-shrink: 1;
+}

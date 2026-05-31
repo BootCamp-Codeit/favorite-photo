@@ -1,0 +1,222 @@
+.openModalContainer {
+  width: 1160px;
+  max-width: 1160px;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  background-color: #141414;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  max-width: 1160px;
+  padding: 32px 32px 30px 120px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-family: 'BR B', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  color: #a4a4a4;
+  margin: 0;
+}
+
+.scrollableContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 120px 32px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* Card Title Box */
+.cardTitleBox {
+  width: 920px;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  padding: 0;
+}
+
+/* Photo and Details Section - detailsSection below photoSection */
+.photoAndDetailsSection {
+  width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.photoSection {
+  flex: 0 0 auto;
+}
+
+.photoImage {
+  width: 480px;
+  height: 360px;
+  object-fit: contain;
+}
+
+.detailsSection {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Grade and Genre Section - genreSection below gradeSection */
+.gradeGenreSection {
+  width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.gradeSection,
+.genreSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 100%;
+  color: #ffffff;
+  margin: 0;
+}
+
+.gradeDropdown,
+.genreDropdown {
+  border: 1px solid #ffffff !important;
+}
+
+.gradeDropdown :global(.wrapper),
+.genreDropdown :global(.wrapper) {
+  border: 1px solid #ffffff !important;
+}
+
+.gradeDropdown :global(.select),
+.genreDropdown :global(.select) {
+  border: 1px solid #ffffff !important;
+}
+
+/* Description Section */
+.descriptionSection {
+  width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.descriptionTextBox {
+  width: 920px !important;
+}
+
+.descriptionTextBox :global(.wrapper) {
+  gap: 0 !important;
+  width: 920px !important;
+}
+
+.descriptionTextBox :global(.label) {
+  display: none !important;
+}
+
+.descriptionTextBox :global(.textarea) {
+  width: 920px !important;
+  max-width: 920px !important;
+  box-sizing: border-box !important;
+}
+
+/* Divider */
+.divider {
+  width: 920px;
+  height: 1px;
+  background-color: #d3d3d3;
+  margin: 0;
+  margin-bottom: -20px;
+  padding: 0;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Action Buttons */
+.actionButtons {
+  margin-top: 0px;
+  width: 920px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+  padding-top: 5px;
+}
+
+.cancelButton,
+.saveButton {
+  flex: 1;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.cancelButton:hover,
+.saveButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.saveButton {
+  background-color: yellow;
+  color: #000000;
+}
+
+.saveButton:hover {
+  background-color: #ffff00;
+  opacity: 0.9;
+}
+
+/* Scrollbar styling */
+.scrollableContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

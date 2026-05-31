@@ -1,0 +1,29 @@
+<svg
+  width="1480"
+  height="1480"
+  viewBox="0 0 1480 1480"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="ellipseFillSky" x1="0" y1="0" x2="0" y2="1480">
+      <stop offset="0%" stop-color="rgba(56,189,248,1)" />
+      <stop offset="100%" stop-color="rgba(15,15,15,1)" />
+    </linearGradient>
+
+    <linearGradient id="ellipseStrokeSky" x1="0" y1="0" x2="0" y2="1480">
+      <stop offset="0%" stop-color="rgba(56,189,248,1)" />
+      <stop offset="100%" stop-color="rgba(102,102,102,0.4)" />
+    </linearGradient>
+  </defs>
+
+  <circle
+    cx="740"
+    cy="740"
+    r="739"
+    fill="url(#ellipseFillSky)"
+    stroke="url(#ellipseStrokeSky)"
+    stroke-width="2"
+    vector-effect="non-scaling-stroke"
+  />
+</svg>

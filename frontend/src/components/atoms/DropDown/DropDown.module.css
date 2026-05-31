@@ -1,0 +1,88 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Trigger button */
+.trigger {
+  width: 100%;
+  height: 46px;
+  padding: 10px 44px 10px 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.trigger:hover {
+  background-color: #111;
+}
+
+.value {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ✅ icon wrapper: 정렬/크기 통일 */
+.icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+
+  width: 24px;
+  height: 24px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ svg(img) 표시 규칙 통일 */
+.icon img {
+  display: block; /* baseline 여백 제거 */
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Dropdown menu */
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #000;
+  border: 1px solid #333;
+  border-radius: 2px;
+  z-index: 1000;
+  max-height: 240px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Options */
+.option {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+}
+
+.option:hover {
+  background-color: #111;
+}
+
+.selected {
+  background-color: #222;
+}

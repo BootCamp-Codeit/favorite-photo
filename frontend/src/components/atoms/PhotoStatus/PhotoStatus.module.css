@@ -1,0 +1,16 @@
+.overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  padding: 6px 12px;
+  z-index: 1;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #efff04;
+  margin: 0;
+}

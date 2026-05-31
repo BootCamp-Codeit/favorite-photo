@@ -1,0 +1,50 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  color: #ffffff;
+}
+
+.textarea {
+  width: 520px;
+  height: 120px;
+
+  background-color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  gap: 2px;
+  padding: 18px 12px;
+
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.5;
+
+  resize: none;
+}
+
+.textarea::placeholder {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 100%;
+  color: #ddd;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #a855f7; /* 포커스 보라색 */
+}
+
+.error {
+  border-color: #ef4444;
+}
+
+.errorMessage {
+  font-size: 14px;
+  color: #ef4444;
+}

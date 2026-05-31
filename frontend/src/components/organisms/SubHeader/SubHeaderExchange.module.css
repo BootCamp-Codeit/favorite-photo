@@ -1,0 +1,158 @@
+.subHeaderExchange {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Desktop: Top handle hidden (only for bottom sheet on mobile/tablet) */
+.mobileTopHandle {
+  display: none;
+}
+
+.handleBar {
+  width: 48px;
+  height: 6px;
+  border-radius: 50px;
+  background-color: #5a5a5a;
+  flex-shrink: 0;
+}
+
+/* Subtitle Box */
+.subtitleBox {
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-family: 'BR B', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  color: #a4a4a4;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+/* Title Box */
+.titleBox {
+  width: 100%;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #5a5a5a;
+  padding-bottom: 16px;
+  padding: 0 20px 16px;
+  box-sizing: border-box;
+}
+
+.mainTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 40px;
+  line-height: 100%;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Filter and Search Section */
+.filterSection {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.filterIconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.filterIconBtn:hover {
+  opacity: 0.8;
+}
+
+.filterIcon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.searchWrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.searchInput {
+  width: 100%;
+}
+
+/* Tablet & Mobile Bottom Sheet (1199px 이하): show top handle */
+@media (max-width: 1199px) {
+  .mobileTopHandle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0 20px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    width: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+  }
+}
+
+/* Mobile-only overrides (499px 이하) */
+@media (max-width: 499px) {
+  .subHeaderExchange {
+    padding: 0;
+  }
+
+  .subtitleBox {
+    padding: 0 20px;
+    margin-bottom: 0;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .titleBox {
+    padding: 0 20px 12px;
+    margin-bottom: 12px;
+  }
+
+  .mainTitle {
+    font-size: 24px;
+  }
+
+  .filterSection {
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 0 20px;
+  }
+
+  .filterIconBtn {
+    width: 48px;
+    height: 48px;
+  }
+}

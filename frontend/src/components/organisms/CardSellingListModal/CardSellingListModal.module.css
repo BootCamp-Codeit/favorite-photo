@@ -1,0 +1,210 @@
+.modalContainer {
+  width: 1160px;
+  max-width: 1160px;
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  background-color: #141414;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* When showing sell form, allow it to fill the container */
+.modalContainer > :global(.formContainer) {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollableContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 32px 120px 32px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* "마이갤러리" Subtitle Box */
+.subtitleBox {
+  width: 920px;
+  height: 67px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-family: 'BR B', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 100%;
+  color: #a4a4a4;
+  margin: 0;
+}
+
+/* "나의 포토카드 판매하기" Title Box */
+.titleBox {
+  width: 920px;
+  height: 67px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 0;
+}
+
+.mainTitle {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 20px;
+}
+
+/* Filter Section */
+.filterSection {
+  width: 920px;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.searchInput {
+  flex-shrink: 0;
+  width: 320px;
+}
+
+.dropdownWrapper {
+  flex-shrink: 0;
+  width: 150px;
+  margin-left: 10px;
+}
+
+.dropdownWrapper :global(select) {
+  background-color: #141414 !important;
+}
+
+.dropdownWrapper :global(select:hover) {
+  background-color: #141414 !important;
+}
+
+/* Cards Grid */
+.cardsGrid {
+  width: 920px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  align-items: start;
+  margin-top: 8px;
+}
+
+.cardItem {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  place-self: center;
+}
+
+/* Scrollbar styling */
+.scrollableContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Mobile Header (499px 이하) */
+.mobileHeader {
+  display: none;
+}
+
+.mobileHeaderTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+.mobileCloseBtn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Tablet & Mobile Bottom Sheet (1199px 이하) – same layout as mobile */
+@media (max-width: 1199px) {
+  .modalContainer {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
+    background-color: #161616;
+  }
+
+  .scrollableContent {
+    padding: 0;
+    gap: 0;
+    min-height: 0;
+  }
+
+  /* Hide desktop-only blocks; SubHeaderExchange is used for header */
+  .subtitleBox,
+  .titleBox,
+  .filterSection {
+    display: none;
+  }
+
+  .cardsGrid {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 0;
+    padding: 0 20px 24px;
+    box-sizing: border-box;
+  }
+}
+
+/* Mobile-only overrides (499px 이하) */
+@media (max-width: 499px) {
+  .mobileHeader {
+    display: none;
+  }
+
+  .cardsGrid {
+    gap: 12px;
+  }
+}

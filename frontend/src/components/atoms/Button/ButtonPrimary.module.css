@@ -1,0 +1,106 @@
+/* ===== common base ===== */
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 2px;
+  border-style: solid;
+
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.default {
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+/* ===== thickness ===== */
+.th_thick {
+  color: black;
+  background: #efff04;
+  border-width: 2px;
+  border-color: #efff04;
+  padding: 25px;
+}
+
+.th_thin {
+  color: black;
+  background: #efff04;
+  color: yellow;
+  border-width: 1px;
+  border-color: #efff04;
+  padding: 17px;
+}
+
+/* disabled(피그마 기준) */
+.th_thick.disabled,
+.th_thin.disabled {
+  background: #9ca3af; /* gray400 */
+  border-color: #9ca3af;
+  color: #111;
+}
+
+/* ===== size (피그마 fixed) ===== */
+.size_l {
+  font-size: 16px;
+}
+
+.size_m {
+  font-size: 16px;
+}
+
+.size_s {
+  font-size: 16px;
+}
+
+.size_xs {
+  font-size: 14px;
+}
+
+/* thin일 때 다른 fixed 값 있으면 오버라이드 */
+.th_thin.size_l {
+  height: 60px;
+}
+
+.th_thin.size_m {
+  color: black;
+  height: 55px;
+}
+
+.th_thin.size_s {
+  height: 55px;
+}
+
+.th_thin.size_xs {
+  height: 40px;
+}
+
+.fullWidth {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+}
+
+.fullWidth.size_l,
+.fullWidth.size_m,
+.fullWidth.size_s,
+.fullWidth.size_xs,
+.fullWidth.th_thin.size_l,
+.fullWidth.th_thin.size_m,
+.fullWidth.th_thin.size_s,
+.fullWidth.th_thin.size_xs {
+  width: 100% !important;
+}
+
+.primary {
+  background-color: #efff04;
+  color: #000000;
+}

@@ -1,0 +1,296 @@
+/* ==================================================
+   Modal container (공통)
+   ================================================== */
+.container {
+  max-width: calc(100vw - 48px);
+  max-height: calc(100dvh - 48px);
+  background: #2b2b2b; /* gray/gray500 */
+  border-radius: 2px;
+}
+
+/* ---------- Size : L (Desktop) ---------- */
+.containerLg {
+  width: 1034px;
+}
+
+/* 선택 전 (피그마 1034 x 646) */
+.containerLg.containerDefault {
+  height: 646px;
+}
+
+/* 선택 후 (피그마 1034 x 765) */
+.containerLg.containerSelected {
+  height: 765px;
+}
+
+/* ---------- Size : M (Tablet) ---------- */
+.containerMd {
+  width: 600px;
+}
+
+.containerMd.containerDefault {
+  height: 500px;
+}
+
+.containerMd.containerSelected {
+  height: 613px;
+}
+
+/* ---------- Size : S (Mobile) ---------- */
+.containerSm {
+  width: 345px;
+}
+
+.containerSm.containerDefault {
+  height: 441px;
+}
+
+.containerSm.containerSelected {
+  height: 541px;
+}
+
+/* ==================================================
+   Layout
+   ================================================== */
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* L 기준 padding-top */
+.containerLg .root {
+  padding-top: 80px;
+}
+
+/* M */
+.containerMd .root {
+  padding-top: 60px;
+}
+
+/* S */
+.containerSm .root {
+  padding-top: 50px;
+}
+
+/* ==================================================
+   Close button
+   ================================================== */
+.close {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ==================================================
+   Header
+   ================================================== */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* L */
+.containerLg .header {
+  width: 362px;
+  gap: 40px;
+}
+
+/* M */
+.containerMd .header {
+  width: 289px;
+  gap: 28px;
+}
+
+/* S */
+.containerSm .header {
+  width: 289px;
+  gap: 24px;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+/* L */
+.containerLg .title {
+  font-size: 46px;
+}
+
+/* M */
+.containerMd .title {
+  font-size: 36px;
+}
+
+/* S */
+.containerSm .title {
+  font-size: 30px;
+}
+
+.titleAccent {
+  color: #d7ff00; /* main */
+}
+
+.desc {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+/* L */
+.containerLg .desc {
+  font-size: 16px;
+}
+
+/* M */
+.containerMd .desc {
+  font-size: 14px;
+}
+
+/* S */
+.containerSm .desc {
+  font-size: 14px;
+}
+
+.timer {
+  margin: 0;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* L */
+.containerLg .timer {
+  font-size: 16px;
+}
+
+/* M */
+.containerMd .timer {
+  font-size: 14px;
+}
+
+/* S */
+.containerSm .timer {
+  font-size: 14px;
+}
+
+.timerAccent {
+  color: #d7ff00;
+  font-weight: 500;
+}
+
+/* ==================================================
+   Random Boxes Row
+   ================================================== */
+.boxRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* L */
+.containerLg .boxRow {
+  margin-top: 120px;
+  width: 836px;
+  height: 198px;
+  gap: 60px;
+}
+
+/* M */
+.containerMd .boxRow {
+  margin-top: 60px;
+  width: 530px;
+  height: 132px;
+  gap: 35px;
+}
+
+/* S */
+.containerSm .boxRow {
+  margin-top: 45px;
+  width: 315px;
+  height: 78px;
+  gap: 16px;
+}
+
+.boxButton {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.boxButton:hover {
+  transform: translateY(-4px);
+}
+
+.boxSelected {
+  transform: translateY(-6px) scale(1.03);
+}
+
+.boxDimmed {
+  filter: brightness(0.4);
+  opacity: 0.6;
+  transform: none;
+}
+
+/* ==================================================
+   Footer (Confirm button)
+   ================================================== */
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* L */
+.containerLg .footer {
+  margin-top: 63px;
+}
+
+/* M */
+.containerMd .footer {
+  margin-top: 45px;
+}
+
+/* S */
+.containerSm .footer {
+  margin-top: 35px;
+}
+
+/* 피그마 기준 버튼 사이즈 */
+.confirmButton {
+  width: 520px !important;
+  height: 60px !important;
+  border-radius: 2px !important;
+}
+
+/* S에서 버튼 폭 줄이기 */
+.containerSm .confirmButton {
+  width: 300px !important;
+}

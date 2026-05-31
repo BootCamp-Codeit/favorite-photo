@@ -1,0 +1,151 @@
+.sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0 20px 24px;
+  background: #161616;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px 0 16px;
+  flex-shrink: 0;
+}
+
+.sheetTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid #5a5a5a;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.tab {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  background: none;
+  border: none;
+  padding: 0 0 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tabActive {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.tabActive::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: #ffffff;
+}
+
+.options {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.optionLabel {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.optionCount {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #5a5a5a;
+  flex-shrink: 0;
+}
+
+@media (max-width: 499px) {
+  .footer {
+    justify-content: center;
+  }
+}
+
+.refreshBtn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.refreshBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.applyBtn {
+  width: 299px;
+  background: #ffff00;
+  color: #000000;
+  font-family: 'Noto Sans KR', sans-serif;
+}

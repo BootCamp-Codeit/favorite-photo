@@ -1,0 +1,533 @@
+.pageContainer {
+  width: 100%;
+  background-color: #000000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.contentWrapper {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  overflow-x: hidden;
+}
+
+/* Desktop Layout */
+.desktopLayout {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+/* Left Sidebar - Navigation */
+.leftSidebar {
+  flex: 0 0 auto;
+  width: auto;
+  padding-top: 0;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+  height: fit-content;
+}
+
+.marketplaceLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.marketplaceLink:hover {
+  opacity: 0.7;
+}
+
+/* Right Main Content */
+.rightMainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Marketplace link above Card Title (desktop) */
+.marketplaceLinkAboveTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  margin-bottom: 16px;
+}
+
+.marketplaceLinkAboveTitle:hover {
+  opacity: 0.7;
+}
+
+/* 1. Page Title "마켓플레이스" - Hidden on desktop */
+.pageTitle {
+  display: none;
+}
+
+/* 2. Card Title Box */
+.cardTitleBox {
+  width: 100%;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Spacing (50px) */
+.spacing50 {
+  width: 100%;
+  height: 50px;
+}
+
+/* 4. Main Content Area */
+.mainContentArea {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+.leftColumn {
+  flex: 0 0 820px;
+  width: 820px;
+}
+
+.cardImage {
+  width: 100%;
+  height: 620px;
+  object-fit: contain;
+}
+
+.rightColumn {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 7. Exchange Cards Container */
+.exchangeCardsContainer {
+  width: 1280px;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.exchangeCardWrapper {
+  flex: 0 0 400px;
+  display: flex;
+  justify-content: center;
+  max-width: 400px;
+  width: 400px;
+}
+
+/* Exchange Wish Info Section */
+.exchangeTitleBox {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d3d3d3;
+  overflow-x: hidden;
+}
+
+.desktopExchangeButton {
+  flex-shrink: 0;
+  /* Match width of .rightColumn (mainContentArea - 820px - 40px gap) so button matches CardBuyer purchase button */
+  width: calc(100% - 860px);
+  min-width: 200px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Exchange button: full width of container, height 75px (matches purchase button) */
+.exchangeButton {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 75px;
+}
+
+.exchangeTitle {
+  margin: 0;
+  padding: 0;
+}
+
+.exchangeDivider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.12);
+  margin: 16px 0;
+}
+
+.exchangeDescription {
+  width: 100%;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-bottom: 16px;
+}
+
+.exchangeRarityCategory {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.exchangeRarity {
+  font-weight: 700;
+}
+
+.exchangeSeparator {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.exchangeCategory {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* My Proposed Exchange List */
+.proposedExchangeTitleBox {
+  width: 100%;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: 1px solid #d3d3d3;
+  padding-bottom: 0;
+}
+
+.proposedExchangeTitle {
+  margin: 0;
+  padding: 0;
+}
+
+.proposedExchangeList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 24px;
+  justify-items: start;
+}
+
+.proposedExchangeItem {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* Target MyCardExchangeCancel component - using > * instead of :global() 
+   because Tailwind v4 PostCSS doesn't support :global() syntax */
+.proposedExchangeItem > * {
+  width: 342px;
+  max-width: 342px;
+  min-width: 342px;
+  height: 517px;
+  min-height: 517px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Mobile Header (499px 이하) */
+.mobileHeader {
+  display: none;
+}
+
+.backButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileHeaderTitle {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+.mobileExchangeButton {
+  display: none;
+}
+
+/* Tablet Responsive Styles (500px–1199px) */
+@media (min-width: 500px) and (max-width: 1199px) {
+  .contentWrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .leftColumn {
+    flex: 0 0 342px;
+    width: 342px;
+  }
+
+  .cardImage {
+    width: 342px;
+    height: 256px;
+    object-fit: contain;
+  }
+
+  /* Exchange button: same 342x75 on tablet */
+  .desktopExchangeButton {
+    width: auto;
+  }
+
+  /* Proposed exchange list: 2 columns, centered on tablet */
+  .proposedExchangeList {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .proposedExchangeItem {
+    justify-content: center;
+  }
+
+  .proposedExchangeItem > * {
+    width: 342px;
+    max-width: 342px;
+    min-width: 342px;
+    height: 517px;
+    min-height: 517px;
+  }
+}
+
+/* Mobile Responsive Styles (499px 이하) */
+@media (max-width: 499px) {
+  .pageContainer {
+    padding: 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Mobile Header */
+  .mobileHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #000000;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* Hide Desktop Page Title */
+  .pageTitle {
+    display: none;
+  }
+
+  /* Content Wrapper Mobile */
+  .contentWrapper {
+    width: 100%;
+    padding: 0;
+  }
+
+  /* Desktop Layout Mobile - Stack vertically */
+  .desktopLayout {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Hide Left Sidebar on Mobile */
+  .leftSidebar {
+    display: none;
+  }
+
+  /* Hide marketplace link above title on mobile (header shows title) */
+  .marketplaceLinkAboveTitle {
+    display: none;
+  }
+
+  /* Hide desktop exchange button; mobile uses .mobileExchangeButton */
+  .desktopExchangeButton {
+    display: none;
+  }
+
+  /* Right Main Content Mobile */
+  .rightMainContent {
+    width: 100%;
+  }
+
+  /* Card Title Box Mobile */
+  .cardTitleBox {
+    width: 100%;
+    height: auto;
+    padding: 20px 20px 20px;
+    border-bottom: 1px solid #5a5a5a;
+  }
+
+  .cardTitle {
+    font-size: 24px !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Spacing Mobile */
+  .spacing50 {
+    width: 100%;
+    height: 0;
+    display: none;
+  }
+
+  /* Main Content Area Mobile - Vertical Stack */
+  .mainContentArea {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 20px;
+  }
+
+  /* Left Column Mobile - Image */
+  .leftColumn {
+    flex: none;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .cardImage {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+
+  /* Right Column Mobile */
+  .rightColumn {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  /* Exchange Title Box Mobile */
+  .exchangeTitleBox {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 20px 20px;
+    border-bottom: 1px solid #5a5a5a;
+  }
+
+  .exchangeTitle {
+    font-size: 24px !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0;
+  }
+
+  /* Exchange Divider Mobile */
+  .exchangeDivider {
+    width: 100%;
+    margin: 16px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  /* Exchange Description Mobile */
+  .exchangeDescription {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+  }
+
+  /* Exchange Rarity Category Mobile */
+  .exchangeRarityCategory {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+  }
+
+  /* Mobile Exchange Button */
+  .mobileExchangeButton {
+    display: block;
+    width: 100%;
+    padding: 0 20px 24px;
+    box-sizing: border-box;
+  }
+
+  /* Proposed Exchange List Mobile */
+  .proposedExchangeTitleBox {
+    width: 100%;
+    padding: 20px 20px 20px;
+  }
+
+  .proposedExchangeTitle {
+    font-size: 24px !important;
+    padding-bottom: 0 !important;
+  }
+
+  .proposedExchangeList {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .proposedExchangeItem > * {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+  }
+}

@@ -1,0 +1,62 @@
+/* InputDropDown.module.css */
+.inputDropDown {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.dropDown {
+  width: 520px;
+  height: 40px;
+  background-color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 100%;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    border-color: #a855f7;
+  }
+  &:focus {
+    border-color: #a855f7;
+  }
+}
+.dropDown:disabled {
+  border-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+.dropDown:focus {
+  border-color: #a855f7;
+}
+.dropDown:active {
+  border-color: #a855f7;
+}
+
+.dropDownOption {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: #a855f7;
+  }
+}
+.dropDownOption:disabled {
+  color: #666;
+  cursor: not-allowed;
+}
+.dropDownOption:focus {
+  border-color: #a855f7;
+}
+.dropDownOption:active {
+  border-color: #a855f7;
+}
+
+.error {
+  border-color: #ef4444;
+}

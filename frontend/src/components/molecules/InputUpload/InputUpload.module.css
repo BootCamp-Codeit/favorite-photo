@@ -1,0 +1,96 @@
+.root {
+  width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.fileBox {
+  flex: 1;
+  height: 60px;
+  padding: 18px 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+}
+
+.fileText {
+  color: #ffffff;
+  font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.placeholder {
+  color: rgba(229, 231, 235, 0.6);
+}
+
+.clearButton {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.clearButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pickButton {
+  width: 120px;
+  height: 60px;
+
+  border-radius: 2px;
+  border: 1px solid #efff04;
+  background: transparent;
+  color: #efff04;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.pickButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.error {
+  border-color: #ef4444 !important;
+}
+
+.errorMessage {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #ef4444;
+}

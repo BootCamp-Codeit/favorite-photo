@@ -1,0 +1,35 @@
+/* InputSearch.module.css */
+.inputSearch {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.input {
+    width: 100%;
+    height: 100%;
+}
+
+.iconSearch {
+    width: 20px;
+    height: 20px;
+}
+
+.iconCross {
+    width: 20px;
+    height: 20px;
+}
+
+.button {
+    &:disabled {
+        background-color: #ccc;
+        color: #666;
+        cursor: not-allowed;
+    }
+.error {
+    border-color: #ffffff;
+}
+.errorMessage {
+    font-size: 14px;
+    color: #ffffff;
+}

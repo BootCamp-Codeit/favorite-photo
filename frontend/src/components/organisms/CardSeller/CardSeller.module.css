@@ -1,0 +1,191 @@
+.cardSellerContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: transparent;
+  padding: 0;
+}
+
+.cardSeller {
+  width: 100%;
+  max-width: 600px;
+  background-color: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rarity {
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+}
+
+.category {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+}
+
+.owner {
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+/* Description */
+.description {
+  padding-bottom: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.wishDescription {
+  padding-bottom: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Info Row */
+.infoRow {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoItem {
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.infoItemLabel {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.infoValue {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.infoValue .outof {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.infoValue .remaining {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Exchange Wish Info */
+.exchangeWishBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0px;
+  border: 0px dashed #a855f7;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.exchangeWishText {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* Second Rarity */
+.secondRarity {
+  color: #60a5fa;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Action Buttons */
+.editButton {
+  width: 100%;
+  background-color: #ffd700;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.editButton:hover {
+  background-color: #ffc700;
+  transform: translateY(-1px);
+}
+
+.editButton:active {
+  transform: translateY(0);
+}
+
+.takeDownButton {
+  width: 100%;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+  margin-top: 12px;
+}
+
+.takeDownButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.takeDownButton:active {
+  transform: translateY(0);
+}

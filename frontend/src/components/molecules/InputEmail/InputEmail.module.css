@@ -1,0 +1,53 @@
+.inputEmail {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.input {
+  width: 100%;
+  height: 60px;
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  background: transparent;
+
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
+  color: #ffffff;
+
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.input:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.error {
+  border-color: rgba(255, 80, 80, 0.95);
+}
+
+.errorMessage {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(255, 80, 80, 0.95);
+}
+
+.disabled {
+  opacity: 0.5;
+}

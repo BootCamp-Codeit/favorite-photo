@@ -1,0 +1,303 @@
+.cardBuyerContainer {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.cardBuyer {
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-x: hidden;
+}
+
+.noData {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  padding: 24px 0;
+  text-align: center;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rarity {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+}
+
+.category {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+}
+
+.owner {
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+/* Description */
+.description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Info Row */
+.infoRow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoItem :global(label) {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.infoValue {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: right;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* Divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.12);
+  margin: 16px 0;
+}
+
+/* Quantity Section */
+.quantitySection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.quantitySection :global(label) {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.quantitySelector {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.quantityButton {
+  background-color: transparent;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.quantityButton:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.quantityButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantityValue {
+  color: #ffffff;
+  font-size: 16px;
+  padding: 8px 16px;
+  min-width: 40px;
+  text-align: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Total Price Section */
+.totalPriceSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.totalPriceSection :global(label) {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.totalPriceValue {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* Purchase Button: yellow, full width, height 75px */
+.purchaseButton {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #efff04;
+  color: #000000;
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.purchaseButton:hover {
+  background-color: #ffc700;
+  transform: translateY(-1px);
+}
+
+.purchaseButton:active {
+  transform: translateY(0);
+}
+
+/* Mobile Responsive Styles (499px 이하) */
+@media (max-width: 499px) {
+  .cardBuyer {
+    padding: 0;
+  }
+
+  /* Header Mobile */
+  .header {
+    margin-bottom: 16px;
+  }
+
+  .rarity {
+    font-size: 16px;
+  }
+
+  .separator {
+    font-size: 16px;
+  }
+
+  .category {
+    font-size: 16px;
+  }
+
+  .owner {
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  /* Description Mobile */
+  .description {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* Divider Mobile */
+  .divider {
+    background-color: #5a5a5a;
+    margin: 16px 0;
+  }
+
+  /* Info Row Mobile */
+  .infoRow {
+    gap: 16px;
+  }
+
+  .infoItem :global(label) {
+    font-size: 14px;
+  }
+
+  .infoValue {
+    font-size: 14px;
+  }
+
+  /* Quantity Section Mobile */
+  .quantitySection {
+    margin-bottom: 16px;
+  }
+
+  .quantitySection :global(label) {
+    font-size: 14px;
+  }
+
+  .quantitySelector {
+    border-color: #ffffff;
+  }
+
+  .quantityValue {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  /* Total Price Section Mobile */
+  .totalPriceSection {
+    margin-bottom: 16px;
+  }
+
+  .totalPriceSection :global(label) {
+    font-size: 14px;
+  }
+
+  .totalPriceValue {
+    font-size: 14px;
+  }
+
+  /* Purchase Button Mobile */
+  .purchaseButton {
+    background-color: #efff04;
+    color: #000000;
+    border-radius: 2px;
+    font-weight: 600;
+    margin-top: 0;
+  }
+}
