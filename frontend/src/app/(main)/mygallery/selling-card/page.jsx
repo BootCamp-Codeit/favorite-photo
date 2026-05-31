@@ -136,7 +136,7 @@ export default function MyGallerySellingPage() {
   }, [soldOut]);
 
   const fetchListings = useCallback(
-    async (cursorOverride = null, append = false) => {
+    async (cursor = null, append = false) => {
       try {
         setLoading(true);
         setError('');
@@ -149,8 +149,7 @@ export default function MyGallerySellingPage() {
         if (meId != null) qs.set('sellerUserId', String(meId));
         if (statusParam) qs.set('status', statusParam);
 
-        const cursorToUse = cursorOverride !== undefined ? cursorOverride : nextCursor;
-        if (cursorToUse) qs.set('cursor', String(cursorToUse));
+        if (cursor) qs.set('cursor', String(cursor));
 
         const url = `${API_BASE}/api/listings?${qs.toString()}`;
 
@@ -164,7 +163,8 @@ export default function MyGallerySellingPage() {
         const mapped = items.map(listingToCard);
 
         setListings((prev) => (append ? [...prev, ...mapped] : mapped));
-        setNextCursor(next);
+        // 추가 로드인데 새 항목 없으면 더 이상 페이지 없음
+        setNextCursor(append && mapped.length === 0 ? null : next);
       } catch (e) {
         setError(e?.message ?? 'failed to load');
         if (!append) setListings([]);
@@ -172,7 +172,7 @@ export default function MyGallerySellingPage() {
         setLoading(false);
       }
     },
-    [API_BASE, meId, statusParam, nextCursor, listingToCard],
+    [API_BASE, meId, statusParam, listingToCard],
   );
 
   // ✅ 타이틀
@@ -232,12 +232,11 @@ export default function MyGallerySellingPage() {
     setPage(1);
   }, [search, grade, genre, sellMethod, soldOut]);
 
-  // ✅ 다음 페이지 필요한데 데이터 부족 + cursor 있으면 추가 fetch
+  // ✅ 다음 페이지에 데이터 부족 + cursor 있을 때만 추가 로드
   useEffect(() => {
     const need = page * PAGE_SIZE;
-    if (filteredCards.length < need && nextCursor && !loading) {
-      fetchListings(undefined, true);
-    }
+    if (page <= 1 || filteredCards.length >= need || !nextCursor || loading) return;
+    fetchListings(nextCursor, true);
   }, [page, filteredCards.length, nextCursor, loading, fetchListings]);
 
   return (
