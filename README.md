@@ -13,6 +13,7 @@ Codeit 풀스택 10기 팀 프로젝트 · **FE + BE monorepo**
 |--|-----|
 | **Frontend (Vercel)** | https://favorite-photo-red.vercel.app |
 | **Backend API (Render)** | https://favorite-photo.onrender.com |
+| **GitHub** | https://github.com/BootCamp-Codeit/favorite-photo |
 
 ### 데모 체험
 
@@ -43,7 +44,7 @@ Codeit 풀스택 10기 팀 프로젝트 · **FE + BE monorepo**
 |------|------|
 | **Frontend (주)** | Atomic Design 기반 공통 컴포넌트·Layout, **마이갤러리** (`mapMyCardToCard`), **랜덤 포인트** (`RandomPointManager`), CONTRIBUTING·팀 FE 리드 |
 | **Backend (일부)** | `point-box-draws` API 연동 |
-| **포트폴리오 (개인)** | monorepo 구성, Render/Vercel 재배포, TiDB 연동, README |
+| **포트폴리오 (개인)** | monorepo 구성, Render/Vercel/TiDB 재배포, 데모 시드, 마켓 필터·검색·등급색 수정 |
 | **팀** | 4명 · FE/BE 병렬 (마켓·구매·카드 생성 등은 팀원 담당 — 각 README 참고) |
 
 ---
@@ -109,7 +110,21 @@ Render Free에는 MySQL이 없어 **[TiDB Cloud Starter](https://tidbcloud.com)*
 
 - BE는 `DB_*` 개별 env (Prisma 아님)
 - **IP Access** → `0.0.0.0/0`
-- ⚠️ repo에 SQL 스키마 파일 없음 — TiDB에 테이블 import 필요
+- 스키마: `backend/schema.sql` → `npm run db:schema`
+- 데모 데이터: `npm run db:seed` (**전체 삭제 후 재생성**)
+
+---
+
+## 포트폴리오 유지보수 (2026-05)
+
+| 항목 | 내용 |
+|------|------|
+| **monorepo** | 팀 분리 repo → `BootCamp-Codeit/favorite-photo` (frontend/ + backend/) |
+| **재배포** | Vercel + Render Starter + TiDB Cloud |
+| **데모 시드** | 유저 20 · 포토카드 100 · 마켓 72+8건 |
+| **마켓플레이스** | 장르 4종 통일, 매진/정렬 API 연동, 검색(Enter·돋보기) |
+| **UI** | 등급별 색상 (`rarityColors.js`) — COMMON/RARE/SUPER RARE/LEGENDARY |
+| **버그 수정** | TiDB SSL, CORS, 판매카드 infinite fetch, signup route 등 |
 
 ---
 
@@ -132,6 +147,8 @@ Render Free에는 MySQL이 없어 **[TiDB Cloud Starter](https://tidbcloud.com)*
 | CORS 에러 | `CORS_ORIGIN` ≠ Vercel URL | Render env 수정 + 재배포 |
 | 로그인 안 됨 | cross-site 쿠키 | `NODE_ENV=production`, FE `withCredentials: true` |
 | 이미지 깨짐 | `next.config` 예전 BE 호스트 | `remotePatterns.hostname` 교체 + Redeploy |
-| DB 연결 실패 | TiDB IP·스키마 미생성 | IP `0.0.0.0/0`, SQL import |
+| DB 연결 실패 | TiDB IP·스키마 미생성 | IP `0.0.0.0/0`, `npm run db:schema` |
+| 마켓 검색 안 됨 | FE 검색 미연동 | Enter/돋보기 → `searchQuery` 필터 (수정 완료) |
+| 등급 색상 동일 | CSS `#efff04` 고정 | `getRarityColor()` 적용 (수정 완료) |
 
 상세 → [backend/README.md](./backend/README.md) · [frontend/README.md](./frontend/README.md)

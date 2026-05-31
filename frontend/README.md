@@ -1,7 +1,9 @@
 # 📗 최애의 포토 — Frontend
 
 포토카드 **생성·마켓플레이스·교환·구매·마이갤러리·랜덤 포인트** UI를 제공하는 **Next.js (App Router)** 프론트엔드입니다.  
-백엔드 API·비즈니스 규칙은 **middle-project-BE** README 및 `http/` 테스트 파일을 기준으로 합니다.
+API·비즈니스 규칙은 [backend/README.md](../backend/README.md) 및 `backend/http/` 테스트 파일을 기준으로 합니다.
+
+> monorepo: [BootCamp-Codeit/favorite-photo](https://github.com/BootCamp-Codeit/favorite-photo)
 
 ---
 
@@ -9,12 +11,21 @@
 
 | 구분 | URL |
 |------|-----|
-| **프론트 (Vercel)** | `https://fe-eight-omega.vercel.app` |
-| **백엔드 (Render)** | `https://be-1-yqrf.onrender.com` |
-| **로컬 FE** | `http://localhost:3000` (Next.js 기본) |
-| **로컬 BE** | `http://localhost:3000` (BE 단독 실행 시 포트 충돌 → FE는 `3001` 등으로 변경) |
+| **프론트 (Vercel)** | https://favorite-photo-red.vercel.app |
+| **백엔드 (Render)** | https://favorite-photo.onrender.com |
+| **GitHub (monorepo)** | https://github.com/BootCamp-Codeit/favorite-photo |
+| **로컬 FE** | http://localhost:3000 (BE와 포트 겹치면 `next dev -p 3001`) |
+| **로컬 BE** | http://localhost:3000 |
 
-> BE에는 Swagger가 없습니다. API 상세는 **middle-project-BE README** + `http/*.http` 를 참고하세요.
+### 데모 체험 (리뷰·포트폴리오)
+
+| | |
+|--|--|
+| **이메일** | `demo@favorite-photo.dev` |
+| **비밀번호** | `qwert12345!` |
+| **닉네임** | 김명환 (85,000P) |
+
+> BE에는 Swagger가 없습니다. API 상세는 [backend/README.md](../backend/README.md) + `backend/http/*.http` 참고.
 
 ---
 
@@ -27,7 +38,7 @@
 | 스타일 | Tailwind CSS 4, CSS Modules |
 | HTTP | axios (`src/lib/http/client.js`) |
 | 구조 | **Atomic Design** — `atoms` / `molecules` / `organisms` / `layout` |
-| 배포 | Vercel |
+| 배포 | Vercel (Root Directory: `frontend`) |
 
 ---
 
@@ -36,7 +47,7 @@
 | 경로 | 기능 |
 |------|------|
 | `/auth`, `/auth/login`, `/auth/signup` | 로그인·회원가입 |
-| `/marketplace` | 마켓 목록·필터 |
+| `/marketplace` | 마켓 목록·검색·필터·정렬 |
 | `/marketplace/[cardId]` | 카드 상세·구매 |
 | `/marketplace/exchange/propose` 등 | 교환 제안·성공/실패 |
 | `/marketplace/purchase/success` 등 | 구매 결과 |
@@ -55,11 +66,11 @@
 ## 환경 변수
 
 ```env
-# 끝에 슬래시 없이 BE Origin (axios·fetch 공통)
-NEXT_PUBLIC_API_BASE_URL=https://be-1-yqrf.onrender.com
+# 끝에 슬래시 없이 BE Origin
+NEXT_PUBLIC_API_BASE_URL=https://favorite-photo.onrender.com
 ```
 
-로컬 예:
+로컬:
 
 ```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
@@ -74,10 +85,13 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
 
 ### 경로 규칙
 
-- **User·세션**: `/users/login`, `/users/me`, `/users/me/cards` → axios `baseURL` + 경로  
-- **도메인 API**: `/api/photo-cards`, `/api/listings`, `/api/point-box-draws/...` → `apiUrl()` 또는 `API_BASE + '/api/...'`
+- **User·세션**: `/users/login`, `/users/me`, `/users/me/cards`
+- **도메인 API**: `/api/photo-cards`, `/api/listings`, `/api/point-box-draws/...`
 
-`next.config.mjs`의 `images.remotePatterns`에 BE 호스트(`be-1-yqrf.onrender.com`)가 등록되어 있어야 카드 이미지가 표시됩니다.
+`next.config.mjs`의 `images.remotePatterns`에 아래 호스트가 등록되어 있어야 카드 이미지가 표시됩니다.
+
+- `favorite-photo.onrender.com`
+- `favorite-photo-red.vercel.app`
 
 ### BE 도메인 대응
 
@@ -94,18 +108,9 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
 
 # 🔐 인증 (httpOnly 쿠키)
 
-- 로그인 성공 시 BE가 **httpOnly 쿠키**(`token`)에 JWT 저장  
-- FE는 **`credentials: 'include'`** 필수 (axios `withCredentials: true`)  
-- 인증 API 예: `GET /users/me`, `GET /users/me/cards`, `POST /api/sell`  
-- BE `CORS_ORIGIN`에 Vercel·로컬 FE Origin 등록 필요  
-
-```js
-// client.js
-export const http = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-  withCredentials: true,
-});
-```
+- 로그인 성공 시 BE가 **httpOnly 쿠키**(`token`)에 JWT 저장
+- FE는 **`withCredentials: true`** 필수
+- BE `CORS_ORIGIN`에 Vercel·로컬 FE Origin 등록 필요
 
 ---
 
@@ -113,33 +118,39 @@ export const http = axios.create({
 
 ### 마이갤러리 — BE 응답 매핑
 
-`GET /users/me/cards` 응답은 `userCard` 래핑·`photoCard` 단독 등 형태가 섞일 수 있습니다.  
-`mygallery/page.jsx`의 `mapMyCardToCard`에서 화면용으로 정규화합니다.
+`GET /users/me/cards` 응답을 `mapMyCardToCard`에서 화면용으로 정규화합니다.
 
-- 등급: `SUPER_RARE` → `SUPER RARE`  
-- 이미지: `/public/...` 제거 후 `API_BASE` 붙이기  
-- 필드: `grade` / `image_url` / `name` 등 snake·camel 혼용 대응  
+- 등급: `SUPER_RARE` → `SUPER RARE`
+- 이미지: `/public/...` 제거 후 `API_BASE` 결합
+- snake_case / camelCase 혼용 대응
+
+### 마켓플레이스 — 필터·검색·정렬
+
+| UI | 동작 |
+|----|------|
+| **검색** | Enter / 돋보기 클릭 시 제목·설명·판매자·장르 기준 클라이언트 필터 |
+| **장르** | `풍경` · `여행` · `인물` · `동물` |
+| **매진** | `status=SOLD_OUT` / `ACTIVE` / `ALL` API 연동 |
+| **정렬** | `sortBy=price\|reg_date`, `sortOrder=ASC\|DESC` API 연동 |
+
+### 등급별 색상
+
+`src/constants/rarityColors.js` — COMMON(노랑) · RARE(파랑) · SUPER RARE(보라) · LEGENDARY(빨강)  
+카드 컴포넌트(`CardOriginal`, `MyCard` 등)에서 공통 사용.
 
 ### 랜덤 포인트 (1시간 쿨다운)
 
-- `RandomPointManager` — `(main)/layout`에 전역 마운트  
-- `POST /api/point-box-draws/draw`  
-- `GET /api/point-box-draws/draw-history` — 마지막 뽑기 시각으로 남은 시간 계산  
-- FE 상수: `COOLDOWN_SECONDS = 3600`, 429 시 BE 메시지 표시  
-- ⚠️ 현재 `userId = 1` 하드코딩(TODO) — 로그인 연동 후 제거 예정  
+- `RandomPointManager` — `(main)/layout`에 전역 마운트
+- `POST /api/point-box-draws/draw`
+- `GET /api/point-box-draws/draw-history` — 남은 쿨다운 계산
+- FE 상수: `COOLDOWN_SECONDS = 3600`, 429 시 BE 메시지 표시
 
 ### 이미지 URL
 
 ```js
-// /public 접두 제거 + 상대경로면 API_BASE 결합
 normalizeImageUrl(pc?.imageUrl ?? pc?.image_url)
+// /public 접두 제거 + 상대경로면 API_BASE 결합
 ```
-
-### 성공/에러 응답 (BE)
-
-- 성공(대부분): `{ ok: true, data: ... }`  
-- User 일부: `{ user: ... }`, `{ data: [...] }`  
-- 에러: `{ ok: false, error: "..." }` 또는 전역 `errorHandler` 형식 — **BE README** 참고  
 
 ---
 
@@ -159,7 +170,7 @@ npm run dev
 | `npm run start` | 빌드 결과 실행 |
 | `npm run lint` | ESLint |
 
-BE를 먼저 띄우고, FE·BE 포트가 겹치면 `next dev -p 3001` 등으로 분리하세요.
+BE를 먼저 띄우고, 포트 충돌 시 `next dev -p 3001` 사용.
 
 ---
 
@@ -171,26 +182,28 @@ src/
 │   ├── auth/              login, signup
 │   └── (main)/            marketplace, mygallery, create-card
 ├── components/
-│   ├── atoms/             Button, Modal, Image …
-│   ├── molecules/         InputEmail, InputPassword …
-│   ├── organisms/         Card*, RandomPoint, MyCard …
+│   ├── atoms/             Button, Modal, Label …
+│   ├── molecules/         InputSearch, InputEmail …
+│   ├── organisms/         Card*, SubHeader, RandomPoint …
 │   └── layout/            Header
-├── lib/
-│   ├── http/              client.js, baseUrl.js
-│   └── auth/              requireAuth.js
-├── hooks/                 useBreakpoint, useDevAuth
-└── constants/
+├── lib/http/              client.js, baseUrl.js
+├── constants/             options.js, rarityColors.js
+└── hooks/                 useBreakpoint
 ```
 
 ---
 
 # ✅ 배포 체크리스트
 
-- [ ] Vercel `NEXT_PUBLIC_API_BASE_URL` = BE Origin (슬래시 없음)  
-- [ ] BE `CORS_ORIGIN`에 `https://fe-eight-omega.vercel.app`  
-- [ ] `next.config.mjs` `images.remotePatterns`에 BE 호스트  
-- [ ] 로그인 후 `withCredentials`로 `/users/me`·마이갤러리 동작  
-- [ ] 랜덤 포인트 1시간 쿨다운·429 UI 확인  
+- [x] Vercel Root Directory = `frontend`
+- [x] `NEXT_PUBLIC_API_BASE_URL=https://favorite-photo.onrender.com`
+- [x] BE `CORS_ORIGIN=https://favorite-photo-red.vercel.app`
+- [x] `next.config.mjs` `images.remotePatterns`에 Render·Vercel 호스트
+- [x] 로그인 후 `withCredentials`로 `/users/me`·마이갤러리 동작
+- [x] 마켓 검색·장르·매진·정렬 필터 동작
+- [x] 등급별 카드 색상 표시
+
+env 변경 후 Vercel **Redeploy** 필수.
 
 ---
 
@@ -198,5 +211,6 @@ src/
 
 | Repo | 역할 |
 |------|------|
-| middle-project-FE | Next.js UI (본 repo) |
-| middle-project-BE | Express + MySQL API |
+| [BootCamp-Codeit/favorite-photo](https://github.com/BootCamp-Codeit/favorite-photo) | **포트폴리오 monorepo** (본 repo) |
+| [codeit-fs-10th-middle/FE](https://github.com/codeit-fs-10th-middle/FE) | 팀 원본 FE |
+| [codeit-fs-10th-middle/BE](https://github.com/codeit-fs-10th-middle/BE) | 팀 원본 BE |

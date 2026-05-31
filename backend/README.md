@@ -12,8 +12,27 @@
 
 | 환경 | URL |
 |------|-----|
-| 로컬 | `http://localhost:3000` |
-| 배포 | 팀에서 사용 중인 API 서버 URL (Render 등) |
+| **로컬** | http://localhost:3000 |
+| **배포 (Render)** | https://favorite-photo.onrender.com |
+| **프론트 (Vercel)** | https://favorite-photo-red.vercel.app |
+| **GitHub** | https://github.com/BootCamp-Codeit/favorite-photo |
+
+### 데모 체험
+
+| | |
+|--|--|
+| **이메일** | `demo@favorite-photo.dev` |
+| **비밀번호** | `qwert12345!` |
+| **닉네임** | 김명환 (85,000P) |
+| **NPC** | `trader01@favorite-photo.dev` ~ `trader19@...` (동일 비밀번호) |
+
+시드 데이터: 유저 20 · 포토카드 100 · 마켓 ACTIVE ~72 · SOLD_OUT ~8
+
+```bash
+cd backend
+npm run db:schema   # 최초 1회 (schema.sql)
+npm run db:seed     # ⚠️ 전체 삭제 후 재생성
+```
 
 ---
 
@@ -173,7 +192,7 @@ POST /api/photo-cards
 |------|------|
 | `creatorUserId` | 생성자 user id |
 | `name` | 카드 이름 |
-| `genre` | 장르 (예: 팬싸) |
+| `genre` | 장르 — `풍경` · `여행` · `인물` · `동물` |
 | `grade` | 등급 (예: common, rare, super_rare) |
 | `totalSupply` | 총 발행 수량 |
 | `description` | 설명 |
@@ -218,11 +237,12 @@ GET /api/listings?limit=10&cursor=5
 
 | Query | 설명 |
 |-------|------|
-| `limit` | 개수 |
-| `cursor` | 무한 스크롤 커서 |
+| `limit` | 개수 (최대 50) |
+| `cursor` | 무한 스크롤 커서 (`listing_id`) |
 | `sortBy` | `reg_date` \| `price` |
 | `sortOrder` | `ASC` \| `DESC` |
-| `status` | 기본 `ACTIVE` |
+| `status` | `ACTIVE`(기본) \| `SOLD_OUT` \| `ALL` |
+| `sellerUserId` | 특정 판매자 리스팅만 조회 |
 
 ```
 GET /api/listings/:id
@@ -246,7 +266,7 @@ POST /api/sell
   "quantity": 1,
   "pricePerUnit": 5000,
   "desired_grade": "rare",
-  "desired_genre": "팬싸",
+  "desired_genre": "여행",
   "desired_desc": "희귀 등급 희망"
 }
 ```
@@ -401,33 +421,53 @@ Content-Type: application/json
 
 ---
 
-# ⚙️ 로컬 실행
+# ⚙️ 로컬·배포 실행
 
-### 1) MySQL (Docker)
+### 1) Database
+
+**로컬 (Docker)**
 
 ```bash
 docker compose up -d db
 ```
 
 - 호스트 포트: **3307** → 컨테이너 3306
-- `.env`에 `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` 설정
 
-### 2) 서버
+**배포 (TiDB Cloud)**
+
+- [TiDB Cloud Starter](https://tidbcloud.com) — MySQL 호환, Free tier
+- Render env: `DB_HOST`, `DB_PORT`(4000), `DB_USER`, `DB_PASSWORD`, `DB_NAME`
+- **IP Access** → `0.0.0.0/0` (Render 연동)
+- `tidbcloud.com` 호스트는 `src/db/mysql.js`에서 SSL 자동 적용
+
+### 2) 스키마·시드
 
 ```bash
 npm install
-npm run dev
+npm run db:schema   # schema.sql → 테이블 생성
+npm run db:seed     # 데모 데이터 (⚠️ 전체 삭제 후 재생성)
+npm run dev         # 또는 npm start (production)
 ```
+
+### 3) Render 배포 (monorepo)
+
+| 항목 | 값 |
+|------|-----|
+| Repository | `BootCamp-Codeit/favorite-photo` |
+| **Root Directory** | `backend` |
+| Build | `npm install` |
+| Start | `npm start` |
 
 ### 주요 환경 변수
 
 | 변수 | 설명 |
 |------|------|
 | `PORT` | 서버 포트 (기본 3000) |
-| `DB_*` | MySQL 연결 |
+| `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` | MySQL/TiDB 연결 |
 | `JWT_SECRET` | JWT 서명 키 |
-| `CORS_ORIGIN` | 허용할 FE Origin |
+| `CORS_ORIGIN` | 허용 FE Origin (예: `https://favorite-photo-red.vercel.app`) |
 | `FRONTEND_URL` | OAuth 리다이렉트 등 |
+| `NODE_ENV` | `production` (배포 시) |
 
 ---
 
@@ -444,7 +484,15 @@ npm run dev
 
 # ✔ 상태
 
-현재 기능 기준으로 `http/` 예시 파일과 본 README가 최신 API 구조를 반영합니다.  
-프론트 개발자는 **본 README + `http/` + FE `NEXT_PUBLIC_API_BASE_URL`** 만으로 연동할 수 있습니다.
+- Live API: https://favorite-photo.onrender.com
+- `http/` 예시 파일 + 본 README가 현재 API 구조를 반영합니다.
+- 프론트 연동: [frontend/README.md](../frontend/README.md) · `NEXT_PUBLIC_API_BASE_URL`
 
-끝.
+---
+
+# 👥 관련 저장소
+
+| Repo | 역할 |
+|------|------|
+| [BootCamp-Codeit/favorite-photo](https://github.com/BootCamp-Codeit/favorite-photo) | **포트폴리오 monorepo** (본 repo) |
+| [codeit-fs-10th-middle/BE](https://github.com/codeit-fs-10th-middle/BE) | 팀 원본 BE |
