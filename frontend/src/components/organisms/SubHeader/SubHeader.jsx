@@ -15,9 +15,12 @@ export default function SubHeader({
   onFiltersChange,
   sort: controlledSort,
   onSortChange,
+  search: controlledSearch,
+  onSearchChange,
+  onSearchSubmit,
   cards = [],
 }) {
-  const [search, setSearch] = useState('');
+  const [internalSearch, setInternalSearch] = useState('');
   const [internalSort, setInternalSort] = useState('newest');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [internalFilters, setInternalFilters] = useState({
@@ -36,6 +39,23 @@ export default function SubHeader({
   const setSort = (value) => {
     if (onSortChange) onSortChange(value);
     else setInternalSort(value);
+  };
+
+  const search = controlledSearch ?? internalSearch;
+  const setSearch = (value) => {
+    if (onSearchChange) onSearchChange(value);
+    else setInternalSearch(value);
+  };
+
+  const handleSearchSubmit = () => {
+    onSearchSubmit?.();
+  };
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSearchSubmit();
+    }
   };
 
   const setFilters = (next) => {
@@ -120,7 +140,8 @@ export default function SubHeader({
                 placeholder="검색"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                onClick={() => {}}
+                onClick={handleSearchSubmit}
+                onKeyDown={handleSearchKeyDown}
                 fullWidth
               />
             </div>
@@ -167,7 +188,8 @@ export default function SubHeader({
             placeholder="검색"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onClick={() => {}}
+            onClick={handleSearchSubmit}
+            onKeyDown={handleSearchKeyDown}
             fullWidth
           />
         </div>

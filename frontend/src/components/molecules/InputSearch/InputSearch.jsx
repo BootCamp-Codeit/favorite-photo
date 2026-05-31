@@ -7,6 +7,7 @@ export default function InputSearch({
   onChange,
   className,
   onClick,
+  onKeyDown,
   error,
   required,
   id,
@@ -30,6 +31,7 @@ export default function InputSearch({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          onKeyDown={onKeyDown}
           required={required}
           disabled={disabled}
           style={{

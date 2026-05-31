@@ -45,6 +45,7 @@ function listingToCard(item) {
     category: pc?.genre ?? '풍경',
     owner: item?.sellerNickname ?? '판매자',
     description: pc?.description || pc?.name || '-',
+    name: pc?.name ?? '',
     price: `${pricePerUnit} P`,
     priceValue: Number(pricePerUnit) || 0,
     remaining: quantity,
@@ -54,9 +55,14 @@ function listingToCard(item) {
   };
 }
 
-function filterCards(cards, filters) {
+function filterCards(cards, filters, searchQuery = '') {
   const { rarity, genre, soldout } = filters || {};
+  const q = searchQuery.trim().toLowerCase();
   return cards.filter((c) => {
+    if (q) {
+      const hay = `${c.description ?? ''} ${c.name ?? ''} ${c.owner ?? ''} ${c.category ?? ''}`.toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
     if (rarity && rarity !== 'all') {
       const r = {
         common: 'COMMON',
@@ -91,6 +97,8 @@ export default function MarketplacePage() {
   const [isSellingModalOpen, setIsSellingModalOpen] = useState(false);
   const [filters, setFilters] = useState({ rarity: 'all', genre: 'all', soldout: 'all' });
   const [sort, setSort] = useState('newest');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [displayCount, setDisplayCount] = useState(INITIAL_COUNT);
   const loadMoreRef = useRef(null);
 
@@ -116,7 +124,7 @@ export default function MarketplacePage() {
   }, [router]);
 
   const fetchListings = useCallback(
-    async (cursor = null, append = false, soldoutFilter = filters.soldout, sortKey = sort) => {
+    async (cursor = null, append = false, soldoutFilter = filters.soldout, sortKey = sort, pageLimit = LISTINGS_LIMIT) => {
       const isLoadMore = append && cursor != null;
       if (isLoadMore) setLoadMoreLoading(true);
       else setLoading(true);
@@ -125,7 +133,7 @@ export default function MarketplacePage() {
       try {
         const { sortBy, sortOrder } = sortParamsFromKey(sortKey);
         const params = new URLSearchParams({
-          limit: String(LISTINGS_LIMIT),
+          limit: String(pageLimit),
           sortBy,
           sortOrder,
         });
@@ -167,22 +175,86 @@ export default function MarketplacePage() {
     [filters.soldout, sort],
   );
 
+  const fetchAllListings = useCallback(
+    async (soldoutFilter = filters.soldout, sortKey = sort) => {
+      setLoading(true);
+      setError(null);
+      try {
+        let all = [];
+        let cursor = null;
+        for (let i = 0; i < 5; i++) {
+          const { sortBy, sortOrder } = sortParamsFromKey(sortKey);
+          const params = new URLSearchParams({
+            limit: '50',
+            sortBy,
+            sortOrder,
+          });
+          const status = statusParamFromSoldout(soldoutFilter);
+          if (status) params.set('status', status);
+          else params.set('status', 'ALL');
+          if (cursor != null) params.set('cursor', String(cursor));
+
+          let res = await http.get(`/api/listings?${params.toString()}`);
+          let data = res.data?.data;
+          let items = data?.items ?? [];
+
+          if (
+            items.length === 0 &&
+            soldoutFilter === 'all' &&
+            cursor == null &&
+            params.get('status') === 'ALL'
+          ) {
+            params.delete('status');
+            res = await http.get(`/api/listings?${params.toString()}`);
+            data = res.data?.data;
+            items = data?.items ?? [];
+          }
+
+          all = [...all, ...items.map(listingToCard)];
+          cursor = data?.nextCursor ?? null;
+          if (!cursor) break;
+        }
+        setListings(all);
+        setNextCursor(null);
+      } catch (err) {
+        setError(err?.message ?? '리스팅을 불러오지 못했습니다.');
+        setListings([]);
+      } finally {
+        setLoading(false);
+        setLoadMoreLoading(false);
+      }
+    },
+    [filters.soldout, sort],
+  );
+
+  const handleSearchSubmit = useCallback(() => {
+    setSearchQuery(searchInput.trim());
+  }, [searchInput]);
+
   useEffect(() => {
     setDisplayCount(INITIAL_COUNT);
-    fetchListings(null, false, filters.soldout, sort);
-  }, [filters.soldout, sort, fetchListings]);
+    if (searchQuery) {
+      fetchAllListings(filters.soldout, sort);
+    } else {
+      fetchListings(null, false, filters.soldout, sort);
+    }
+  }, [filters.soldout, sort, searchQuery, fetchListings, fetchAllListings]);
 
-  const filteredCards = useMemo(() => filterCards(listings, filters), [listings, filters]);
+  const filteredCards = useMemo(
+    () => filterCards(listings, filters, searchQuery),
+    [listings, filters, searchQuery],
+  );
   const visibleCards = useMemo(
     () => filteredCards.slice(0, displayCount),
     [filteredCards, displayCount],
   );
 
-  const hasMore = displayCount < filteredCards.length || nextCursor != null;
+  const hasMore =
+    !searchQuery && (displayCount < filteredCards.length || nextCursor != null);
 
   useEffect(() => {
     setDisplayCount(INITIAL_COUNT);
-  }, [filters.rarity, filters.genre]);
+  }, [filters.rarity, filters.genre, searchQuery]);
 
   const loadMore = useCallback(
     (entries) => {
@@ -217,6 +289,9 @@ export default function MarketplacePage() {
         onFiltersChange={setFilters}
         sort={sort}
         onSortChange={setSort}
+        search={searchInput}
+        onSearchChange={setSearchInput}
+        onSearchSubmit={handleSearchSubmit}
         cards={listings}
       />
 
