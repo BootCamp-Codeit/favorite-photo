@@ -13,10 +13,12 @@ export default function SubHeader({
   onSellClick,
   filters: controlledFilters,
   onFiltersChange,
+  sort: controlledSort,
+  onSortChange,
   cards = [],
 }) {
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState('lowPrice');
+  const [internalSort, setInternalSort] = useState('newest');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [internalFilters, setInternalFilters] = useState({
     rarity: 'all',
@@ -29,6 +31,12 @@ export default function SubHeader({
   const rarity = filters.rarity ?? 'all';
   const genre = filters.genre ?? 'all';
   const soldout = filters.soldout ?? 'all';
+
+  const sort = controlledSort ?? internalSort;
+  const setSort = (value) => {
+    if (onSortChange) onSortChange(value);
+    else setInternalSort(value);
+  };
 
   const setFilters = (next) => {
     if (isControlled) {
@@ -54,8 +62,8 @@ export default function SubHeader({
       { value: 'all', label: '장르' },
       { value: '풍경', label: '풍경' },
       { value: '여행', label: '여행' },
-      { value: 'portrait', label: '인물' },
-      { value: 'animal', label: '동물' },
+      { value: '인물', label: '인물' },
+      { value: '동물', label: '동물' },
     ],
     [],
   );

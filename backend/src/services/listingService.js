@@ -132,7 +132,7 @@ async function listListings({ limit = 20, cursor = null, sortBy = "reg_date", so
         cursor: parsedCursor,
         sortBy,
         sortOrder: sortOrder.toUpperCase(),
-        status,
+        status: status === null ? null : status,
         sellerUserId: parsedSellerUserId != null && Number.isInteger(parsedSellerUserId) ? parsedSellerUserId : null,
     });
 

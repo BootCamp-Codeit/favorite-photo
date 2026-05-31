@@ -61,7 +61,7 @@ export function buildPhotoCard(index, creatorUserId) {
     creatorUserId,
     name: buildCardName(index),
     description: pick(CARD_DESCRIPTIONS),
-    genre: pick(['풍경', '여행', '팬싸', '공연', '앨범', '팬미팅']),
+    genre: pick(GENRES),
     grade,
     minPrice,
     totalSupply: randomInt(3, 30),

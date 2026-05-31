@@ -21,6 +21,7 @@ import {
   randomInt,
   shuffle,
 } from './seed-helpers.js';
+import { GENRES } from './seed-data.js';
 
 const BCRYPT_ROUNDS = 10;
 
@@ -209,7 +210,7 @@ async function main() {
           listQty,
           price,
           saleType === 'SELL_OR_EXCHANGE' ? pick(['RARE', 'SUPER RARE', 'LEGENDARY']) : null,
-          saleType === 'SELL_OR_EXCHANGE' ? pick(['팬싸', '앨범', '공연']) : null,
+          saleType === 'SELL_OR_EXCHANGE' ? pick(GENRES) : null,
           saleType === 'SELL_OR_EXCHANGE' ? '동급 이상 교환 희망' : null,
           regDate,
           regDate,

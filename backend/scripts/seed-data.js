@@ -13,7 +13,7 @@ export const TARGET_PURCHASES = 24;
 export const GRADES = ['COMMON', 'RARE', 'SUPER RARE', 'LEGENDARY'];
 export const GRADE_WEIGHTS = [42, 32, 18, 8];
 
-export const GENRES = ['풍경', '여행', '팬싸', '공연', '앨범', '팬미팅'];
+export const GENRES = ['풍경', '여행', '인물', '동물'];
 
 export const SALE_TYPES = ['SELL', 'SELL', 'SELL', 'SELL_OR_EXCHANGE'];
 

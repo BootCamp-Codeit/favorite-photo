@@ -4,18 +4,7 @@ import { createUserCard, findAllByUserId, getTotalQuantityByPhotoCardId } from "
 const MONTHLY_LIMIT = Number(process.env.PHOTO_CARD_MONTHLY_LIMIT || 3);
 
 const ALLOWED_GRADES = new Set(["common", "rare", "epic", "legendary"]);
-const ALLOWED_GENRES = new Set([
-    "앨범",
-    "특전",
-    "팬싸",
-    "시즌그리팅",
-    "팬미팅",
-    "콘서트",
-    "MD",
-    "콜라보",
-    "팬클럽",
-    "기타",
-]);
+const ALLOWED_GENRES = new Set(["풍경", "여행", "인물", "동물"]);
 
 function normalizeGrade(value) {
     const v = String(value ?? "").trim().toLowerCase();

@@ -41,8 +41,8 @@ export default function OpenModal({ open, onClose, cardData, mode = 'edit', onSe
 
   const genreOptions = [
     { value: '풍경', label: '풍경' },
+    { value: '여행', label: '여행' },
     { value: '인물', label: '인물' },
-    { value: '음식', label: '음식' },
     { value: '동물', label: '동물' },
   ];
 

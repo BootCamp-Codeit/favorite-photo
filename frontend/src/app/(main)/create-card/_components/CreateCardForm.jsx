@@ -24,7 +24,7 @@ const GRADE_OPTIONS = [
 
 const GENRE_OPTIONS = [
   { label: '풍경', value: '풍경' },
-  { label: '음식', value: '음식' },
+  { label: '여행', value: '여행' },
   { label: '인물', value: '인물' },
   { label: '동물', value: '동물' },
 ];

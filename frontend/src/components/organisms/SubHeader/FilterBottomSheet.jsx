@@ -46,7 +46,9 @@ function countByGenre(cards) {
 function countSold(cards) {
   let sold = 0;
   let available = 0;
-  cards.forEach((c) => (c.remaining > 0 ? available++ : sold++));
+  cards.forEach((c) =>
+    c.status === 'SOLD_OUT' || c.remaining === 0 ? sold++ : available++,
+  );
   return { soldout: sold, available };
 }
 
@@ -89,8 +91,8 @@ export default function FilterBottomSheet({
         if (r && c.rarity !== r) return false;
       }
       if (genre !== 'all' && c.category !== genre) return false;
-      if (soldout === 'soldout' && c.remaining > 0) return false;
-      if (soldout === 'available' && c.remaining === 0) return false;
+      if (soldout === 'soldout' && c.status !== 'SOLD_OUT' && c.remaining > 0) return false;
+      if (soldout === 'available' && (c.status === 'SOLD_OUT' || c.remaining === 0)) return false;
       return true;
     }).length;
   }, [cards, rarity, genre, soldout]);

@@ -22,7 +22,12 @@ export async function list(req, res, next) {
         const cursor = req.query?.cursor;
         const sortBy = req.query?.sortBy || "reg_date";
         const sortOrder = req.query?.sortOrder || "DESC";
-        const status = req.query?.status || "ACTIVE";
+        const statusRaw = req.query?.status;
+        // status 생략 → ACTIVE, ALL → 전체(ACTIVE+SOLD_OUT), 그 외 → 해당 status
+        let status = "ACTIVE";
+        if (statusRaw === "ALL" || statusRaw === "all") status = null;
+        else if (statusRaw != null && statusRaw !== "") status = statusRaw;
+
         const sellerUserId = req.query?.sellerUserId ?? null;
 
         const data = await listingService.listListings({

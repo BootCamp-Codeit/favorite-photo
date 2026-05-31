@@ -12,48 +12,44 @@ const LISTINGS_LIMIT = 10;
 const INITIAL_COUNT = 10;
 const LOAD_MORE_COUNT = 10;
 
-/* ============================
- * ✅ 이미지 URL 정규화 함수 (추가)
- * ============================ */
 function normalizeImageUrl(url) {
   if (!url) return null;
 
   let normalized = url;
-
-  // 1️⃣ "/public/xxx" → "/xxx"
   if (normalized.startsWith('/public/')) {
     normalized = normalized.replace('/public', '');
   }
-
-  // 2️⃣ 상대경로면 백엔드 baseURL 붙이기
   if (normalized.startsWith('/')) {
     const base = process.env.NEXT_PUBLIC_API_BASE_URL;
     if (base) return `${base}${normalized}`;
   }
-
-  // 이미 https:// 로 시작하면 그대로
   return normalized;
 }
 
-/**
- * API 리스팅 항목을 카드 표시용 객체로 변환
- */
+function normalizeGrade(v) {
+  const g = String(v ?? '').toUpperCase();
+  if (g === 'SUPER_RARE') return 'SUPER RARE';
+  return g || 'COMMON';
+}
+
 function listingToCard(item) {
   const pc = item?.photoCard ?? {};
   const quantity = Number(item?.quantity ?? 0);
   const pricePerUnit = item?.pricePerUnit ?? 0;
-
+  const status = item?.status ?? 'ACTIVE';
   const imageSrc = normalizeImageUrl(pc?.imageUrl) || '/assets/products/photo-card.svg';
 
   return {
     id: item?.listingId,
-    rarity: pc?.grade ?? 'COMMON',
+    rarity: normalizeGrade(pc?.grade),
     category: pc?.genre ?? '풍경',
     owner: item?.sellerNickname ?? '판매자',
     description: pc?.description || pc?.name || '-',
     price: `${pricePerUnit} P`,
+    priceValue: Number(pricePerUnit) || 0,
     remaining: quantity,
     outof: quantity,
+    status,
     imageSrc,
   };
 }
@@ -71,10 +67,22 @@ function filterCards(cards, filters) {
       if (r && c.rarity !== r) return false;
     }
     if (genre && genre !== 'all' && c.category !== genre) return false;
-    if (soldout === 'soldout' && c.remaining > 0) return false;
-    if (soldout === 'available' && c.remaining === 0) return false;
+    if (soldout === 'soldout' && c.status !== 'SOLD_OUT' && c.remaining > 0) return false;
+    if (soldout === 'available' && (c.status === 'SOLD_OUT' || c.remaining === 0)) return false;
     return true;
   });
+}
+
+function sortParamsFromKey(sort) {
+  if (sort === 'lowPrice') return { sortBy: 'price', sortOrder: 'ASC' };
+  if (sort === 'highPrice') return { sortBy: 'price', sortOrder: 'DESC' };
+  return { sortBy: 'reg_date', sortOrder: 'DESC' };
+}
+
+function statusParamFromSoldout(soldout) {
+  if (soldout === 'soldout') return 'SOLD_OUT';
+  if (soldout === 'available') return 'ACTIVE';
+  return 'ALL';
 }
 
 export default function MarketplacePage() {
@@ -82,6 +90,7 @@ export default function MarketplacePage() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isSellingModalOpen, setIsSellingModalOpen] = useState(false);
   const [filters, setFilters] = useState({ rarity: 'all', genre: 'all', soldout: 'all' });
+  const [sort, setSort] = useState('newest');
   const [displayCount, setDisplayCount] = useState(INITIAL_COUNT);
   const loadMoreRef = useRef(null);
 
@@ -106,44 +115,46 @@ export default function MarketplacePage() {
     fetchUser();
   }, [router]);
 
-  const fetchListings = useCallback(async (cursor = null, append = false) => {
-    const isLoadMore = append && cursor != null;
-    if (isLoadMore) setLoadMoreLoading(true);
-    else setLoading(true);
+  const fetchListings = useCallback(
+    async (cursor = null, append = false, soldoutFilter = filters.soldout, sortKey = sort) => {
+      const isLoadMore = append && cursor != null;
+      if (isLoadMore) setLoadMoreLoading(true);
+      else setLoading(true);
 
-    setError(null);
-    try {
-      const params = new URLSearchParams({ limit: String(LISTINGS_LIMIT) });
-      if (cursor != null) params.set('cursor', String(cursor));
+      setError(null);
+      try {
+        const { sortBy, sortOrder } = sortParamsFromKey(sortKey);
+        const params = new URLSearchParams({
+          limit: String(LISTINGS_LIMIT),
+          sortBy,
+          sortOrder,
+          status: statusParamFromSoldout(soldoutFilter),
+        });
+        if (cursor != null) params.set('cursor', String(cursor));
 
-      const res = await http.get(`/api/listings?${params.toString()}`);
-      const data = res.data?.data;
-      const items = data?.items ?? [];
-      const next = data?.nextCursor ?? null;
+        const res = await http.get(`/api/listings?${params.toString()}`);
+        const data = res.data?.data;
+        const items = data?.items ?? [];
+        const next = data?.nextCursor ?? null;
+        const cards = items.map(listingToCard);
 
-      // ✅ 여기 추가 (핵심)
-      console.log('LISTINGS RAW ITEMS:', items);
-      if (items.length >= 2) {
-        console.log('CARD 0 photocard:', items[0]?.photoCard);
-        console.log('CARD 1 photocard:', items[1]?.photoCard);
+        setListings((prev) => (append ? [...prev, ...cards] : cards));
+        setNextCursor(next);
+      } catch (err) {
+        setError(err?.message ?? '리스팅을 불러오지 못했습니다.');
+        if (!append) setListings([]);
+      } finally {
+        setLoading(false);
+        setLoadMoreLoading(false);
       }
-
-      const cards = items.map(listingToCard);
-
-      setListings((prev) => (append ? [...prev, ...cards] : cards));
-      setNextCursor(next);
-    } catch (err) {
-      setError(err?.message ?? '리스팅을 불러오지 못했습니다.');
-      if (!append) setListings([]);
-    } finally {
-      setLoading(false);
-      setLoadMoreLoading(false);
-    }
-  }, []);
+    },
+    [filters.soldout, sort],
+  );
 
   useEffect(() => {
-    fetchListings();
-  }, [fetchListings]);
+    setDisplayCount(INITIAL_COUNT);
+    fetchListings(null, false, filters.soldout, sort);
+  }, [filters.soldout, sort, fetchListings]);
 
   const filteredCards = useMemo(() => filterCards(listings, filters), [listings, filters]);
   const visibleCards = useMemo(
@@ -155,7 +166,7 @@ export default function MarketplacePage() {
 
   useEffect(() => {
     setDisplayCount(INITIAL_COUNT);
-  }, [filters]);
+  }, [filters.rarity, filters.genre]);
 
   const loadMore = useCallback(
     (entries) => {
@@ -165,10 +176,10 @@ export default function MarketplacePage() {
       if (displayCount < filteredCards.length) {
         setDisplayCount((n) => Math.min(n + LOAD_MORE_COUNT, filteredCards.length));
       } else if (nextCursor != null) {
-        fetchListings(nextCursor, true);
+        fetchListings(nextCursor, true, filters.soldout, sort);
       }
     },
-    [displayCount, filteredCards.length, nextCursor, loadMoreLoading, fetchListings],
+    [displayCount, filteredCards.length, nextCursor, loadMoreLoading, fetchListings, filters.soldout, sort],
   );
 
   useEffect(() => {
@@ -188,27 +199,43 @@ export default function MarketplacePage() {
         onSellClick={() => setIsSellingModalOpen(true)}
         filters={filters}
         onFiltersChange={setFilters}
+        sort={sort}
+        onSortChange={setSort}
         cards={listings}
       />
 
       <div className={`mx-auto w-full max-w-[1280px] px-5 py-10 ${styles.listWrapper}`}>
+        {loading && listings.length === 0 && (
+          <div className="py-10 text-center text-white/60">불러오는 중...</div>
+        )}
+        {error && (
+          <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
+            {error}
+          </div>
+        )}
+
         <div className={styles.cardGrid}>
-          {visibleCards.map((card) => (
-            <CardOriginal
-              key={card.id}
-              rarity={card.rarity}
-              category={card.category}
-              owner={card.owner}
-              description={card.description}
-              price={card.price}
-              remaining={card.remaining}
-              outof={card.outof}
-              imageSrc={card.imageSrc}
-              onClick={() => router.push(`/marketplace/${card.id}`)}
-              detailHref={`/marketplace/${card.id}`}
-            />
-          ))}
+          {!loading &&
+            visibleCards.map((card) => (
+              <CardOriginal
+                key={card.id}
+                rarity={card.rarity}
+                category={card.category}
+                owner={card.owner}
+                description={card.description}
+                price={card.price}
+                remaining={card.remaining}
+                outof={card.outof}
+                imageSrc={card.imageSrc}
+                onClick={() => router.push(`/marketplace/${card.id}`)}
+                detailHref={`/marketplace/${card.id}`}
+              />
+            ))}
         </div>
+
+        {!loading && visibleCards.length === 0 && (
+          <div className="py-10 text-center text-white/60">조건에 맞는 포토카드가 없습니다.</div>
+        )}
 
         {hasMore && <div ref={loadMoreRef} className={styles.sentinel} />}
       </div>
