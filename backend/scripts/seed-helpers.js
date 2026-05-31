@@ -2,6 +2,7 @@ import {
   CARD_DESCRIPTIONS,
   CARD_IMAGES,
   CARD_NAME_PARTS,
+  GENRES,
   GRADE_WEIGHTS,
   GRADES,
 } from './seed-data.js';
