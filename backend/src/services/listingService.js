@@ -90,9 +90,11 @@ async function createListing(sellerUserId, payload) {
 }
 
 // 리스팅 목록 조회
-async function listListings({ limit = 20, cursor = null, sortBy = "reg_date", sortOrder = "DESC", status = "ACTIVE" } = {}) {
+async function listListings({ limit = 20, cursor = null, sortBy = "reg_date", sortOrder = "DESC", status = "ACTIVE", sellerUserId = null } = {}) {
     const parsedLimit = Math.min(Number(limit) || 20, 50);
     const parsedCursor = cursor != null ? Number(cursor) : null;
+    const parsedSellerUserId =
+        sellerUserId != null && sellerUserId !== "" ? Number(sellerUserId) : null;
 
     if (!Number.isInteger(parsedLimit) || parsedLimit <= 0) {
         const err = new Error("VALIDATION_ERROR");
@@ -131,6 +133,7 @@ async function listListings({ limit = 20, cursor = null, sortBy = "reg_date", so
         sortBy,
         sortOrder: sortOrder.toUpperCase(),
         status,
+        sellerUserId: parsedSellerUserId != null && Number.isInteger(parsedSellerUserId) ? parsedSellerUserId : null,
     });
 
     const items = rows.map(mapRow);

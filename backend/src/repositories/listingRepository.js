@@ -75,6 +75,7 @@ async function listListings({
     sortBy = "reg_date",
     sortOrder = "DESC",
     status = "ACTIVE",
+    sellerUserId = null,
 }) {
     // 정렬 필드 검증
     const allowedSortFields = {
@@ -120,6 +121,11 @@ async function listListings({
     `;
 
     const params = [...statusParam];
+
+    if (sellerUserId != null) {
+        sql += ` AND l.seller_user_id = ?`;
+        params.push(Number(sellerUserId));
+    }
 
     // cursor 기반 페이지네이션 (listing_id를 cursor로 사용)
     if (cursor != null) {

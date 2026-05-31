@@ -11,10 +11,20 @@ Codeit 풀스택 10기 팀 프로젝트 · **FE + BE monorepo**
 
 | | URL |
 |--|-----|
-| **Frontend (Vercel)** | _(배포 예정)_ |
-| **Backend API (Render)** | _(배포 예정)_ |
+| **Frontend (Vercel)** | https://favorite-photo-red.vercel.app |
+| **Backend API (Render)** | https://favorite-photo.onrender.com |
 
-> Render Free tier는 **15분 미사용 시 sleep** → 첫 요청 30~60초 걸릴 수 있습니다.
+### 데모 체험
+
+| | |
+|--|--|
+| **데모 계정** | `demo@favorite-photo.dev` |
+| **비밀번호** | `qwert12345!` |
+| **닉네임** | 김명환 |
+| **시드** | 유저 20 · 포토카드 100 · 마켓 ACTIVE ~72 |
+| **NPC** | `trader01@favorite-photo.dev` ~ `trader19@...` (동일 비밀번호) |
+
+> Render Starter 사용 시 sleep 없음. 시드 재실행: `cd backend && npm run db:seed` (**전체 삭제 후 재생성**)
 
 ---
 
@@ -51,6 +61,13 @@ npm run dev
 cd frontend
 # .env.local: NEXT_PUBLIC_API_BASE_URL=http://localhost:3000
 npm install && npm run dev
+```
+
+```bash
+# Backend — TiDB 시드 (전체 삭제 후 재생성)
+cd backend
+npm run db:schema   # 최초 1회
+npm run db:seed
 ```
 
 | 로컬 URL | |

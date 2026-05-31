@@ -23,6 +23,7 @@ export async function list(req, res, next) {
         const sortBy = req.query?.sortBy || "reg_date";
         const sortOrder = req.query?.sortOrder || "DESC";
         const status = req.query?.status || "ACTIVE";
+        const sellerUserId = req.query?.sellerUserId ?? null;
 
         const data = await listingService.listListings({
             limit,
@@ -30,6 +31,7 @@ export async function list(req, res, next) {
             sortBy,
             sortOrder,
             status,
+            sellerUserId,
         });
         return res.json({ ok: true, data });
     } catch (err) {

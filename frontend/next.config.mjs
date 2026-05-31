@@ -6,7 +6,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'be-1-yqrf.onrender.com',
+        hostname: 'favorite-photo.onrender.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'favorite-photo-red.vercel.app',
         pathname: '/**',
       },
     ],
