@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Modal from '@/components/atoms/Modal/Modal';
 import { ButtonPrimary, ButtonSecondary, ResponsiveButton } from '@/components/atoms/Button';
 import styles from './FilterBottomSheet.module.css';
+import { RARITY_COLORS } from '@/constants/rarityColors';
 
 const GENRE_OPTIONS = [
   { value: 'all', label: '전체' },
@@ -19,13 +20,6 @@ const SOLD_OPTIONS = [
   { value: 'soldout', label: '매진' },
   { value: 'available', label: '판매중' },
 ];
-
-const RARITY_COLORS = {
-  COMMON: '#FFD700',
-  RARE: '#60a5fa',
-  'SUPER RARE': '#9D4EDD',
-  LEGENDARY: '#FF1744',
-};
 
 function countByGrade(cards) {
   const map = { COMMON: 0, RARE: 0, 'SUPER RARE': 0, LEGENDARY: 0 };

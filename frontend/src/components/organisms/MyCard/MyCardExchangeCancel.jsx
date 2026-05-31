@@ -3,6 +3,7 @@ import styles from './MyCardExchangeCancel.module.css';
 import Image from 'next/image';
 import Label from '../../atoms/Label/Label';
 import { ButtonPrimary } from '@/components/atoms/Button';
+import { getRarityColor } from '@/constants/rarityColors';
 
 export default function MyCardExchangeCancel({
   rarity = 'COMMON',
@@ -38,7 +39,9 @@ export default function MyCardExchangeCancel({
         {/* Metadata */}
         <div className={styles.metadata}>
           <div className={styles.metadataLeft}>
-            <Label className={styles.rarity}>{rarity}</Label>
+            <Label className={styles.rarity} style={{ color: getRarityColor(rarity) }}>
+              {rarity}
+            </Label>
             <Label className={styles.separator}>|</Label>
             <Label className={styles.category}>{category}</Label>
             <Label className={styles.separator}>|</Label>

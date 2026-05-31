@@ -12,6 +12,7 @@ import CardExchangeModal from '@/components/organisms/CardExchangeModal';
 import MyCardExchangeCancel from '@/components/organisms/MyCard/MyCardExchangeCancel';
 import ExchangeFormContent from './exchange/ExchangeFormContent';
 import { http } from '@/lib/http/client';
+import { getRarityColor } from '@/constants/rarityColors';
 import { sampleCards } from '../sampleCards';
 import styles from './page.module.css';
 import purchaseModalStyles from './PurchaseConfirmModal.module.css';
@@ -489,14 +490,7 @@ export default function MarketplaceCardPurchasePage() {
                     <span
                       className={styles.exchangeRarity}
                       style={{
-                        color:
-                          mainCardData.secondRarity === 'LEGENDARY'
-                            ? '#FF1744'
-                            : mainCardData.secondRarity === 'SUPER RARE'
-                              ? '#9D4EDD'
-                              : mainCardData.secondRarity === 'RARE'
-                                ? '#60a5fa'
-                                : '#FFD700',
+                        color: getRarityColor(mainCardData.secondRarity),
                         fontWeight: 700,
                       }}
                     >

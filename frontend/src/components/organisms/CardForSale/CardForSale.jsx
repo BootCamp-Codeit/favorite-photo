@@ -3,6 +3,7 @@ import styles from './CardForSale.module.css';
 import Image from 'next/image';
 import Label from '../../atoms/Label/Label';
 import PhotoStatus from '../../atoms/PhotoStatus/PhotoStatus';
+import { getRarityColor } from '@/constants/rarityColors';
 // import logo from '../../../../public/assets/icons/logos/logo.svg';
 // import photoCardSoldout from '../../../../public/assets/products/photo-card-soldout.svg';
 
@@ -29,7 +30,9 @@ export default function CardForSale({ rarity, category, owner, description, pric
         {/* Metadata */}
         <div className={styles.metadata}>
           <div className={styles.metadataLeft}>
-            <Label className={styles.rarity}>{rarity}</Label>
+            <Label className={styles.rarity} style={{ color: getRarityColor(rarity) }}>
+              {rarity}
+            </Label>
             <Label className={styles.separator}>|</Label>
             <Label className={styles.category}>{category}</Label>
           </div>

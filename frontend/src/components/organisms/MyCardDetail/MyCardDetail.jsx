@@ -6,6 +6,7 @@ import InputLabel from '../../molecules/InputLabel/InputLabel';
 import { ButtonPrimary, ButtonSecondary, ResponsiveButton } from '@/components/atoms/Button';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { getRarityColor } from '@/constants/rarityColors';
 
 export default function MyCardDetail({
   rarity = 'COMMON',
@@ -70,7 +71,7 @@ export default function MyCardDetail({
               fontSize: '24px',
               fontWeight: 'bold',
               lineHeight: '100%',
-              color: '#EFFF04',
+              color: getRarityColor(rarity),
             }}
           >
             {rarity}

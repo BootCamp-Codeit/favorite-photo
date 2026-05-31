@@ -4,13 +4,7 @@ import styles from './CardBuyer.module.css';
 import Image from 'next/image';
 import Label from '../../atoms/Label/Label';
 import { ButtonBase } from '@/components/atoms/Button';
-
-const RARITY_COLORS = {
-  COMMON: '#FFD700',
-  RARE: '#60a5fa',
-  'SUPER RARE': '#9D4EDD',
-  LEGENDARY: '#FF1744',
-};
+import { getRarityColor } from '@/constants/rarityColors';
 
 function hasValue(v) {
   return v != null && v !== '';
@@ -52,7 +46,7 @@ export default function CardBuyer({
     );
   }
 
-  const rarityColor = RARITY_COLORS[rarity] || '#FFD700';
+  const rarityColor = getRarityColor(rarity);
 
   return (
     <div className={styles.cardBuyerContainer}>

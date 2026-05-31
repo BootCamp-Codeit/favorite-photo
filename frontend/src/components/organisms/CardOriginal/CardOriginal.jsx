@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import styles from './CardOriginal.module.css';
 import Label from '../../atoms/Label/Label';
+import { getRarityColor } from '@/constants/rarityColors';
 
 export default function CardOriginal({
   rarity = 'COMMON',
@@ -64,7 +65,9 @@ export default function CardOriginal({
         {/* Metadata */}
         <div className={styles.metadata}>
           <div className={styles.metadataLeft}>
-            <Label className={styles.rarity}>{rarity}</Label>
+            <Label className={styles.rarity} style={{ color: getRarityColor(rarity) }}>
+              {rarity}
+            </Label>
             <Label className={styles.separator}>|</Label>
             <Label className={styles.category}>{category}</Label>
           </div>

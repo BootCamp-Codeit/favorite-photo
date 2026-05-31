@@ -4,6 +4,7 @@ import styles from './CardSeller.module.css';
 import Image from 'next/image';
 import Label from '../../atoms/Label/Label';
 import RefreshIcon from '../../../../public/assets/icons/ic_refresh.svg';
+import { getRarityColor } from '@/constants/rarityColors';
 
 export default function CardSeller({
   rarity,
@@ -25,19 +26,7 @@ export default function CardSeller({
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.headerLeft}>
-            <span
-              className={styles.rarity}
-              style={{
-                color:
-                  rarity === 'LEGENDARY'
-                    ? '#FF0000'
-                    : rarity === 'SUPER RARE'
-                      ? '#9D4EDD'
-                      : rarity === 'RARE'
-                        ? '#60a5fa'
-                        : '#FFD700',
-              }}
-            >
+            <span className={styles.rarity} style={{ color: getRarityColor(rarity) }}>
               {rarity}
             </span>
             <span className={styles.separator}>|</span>
@@ -77,7 +66,9 @@ export default function CardSeller({
         {/* Second Header */}
         <div className={styles.header}>
           <div className={styles.headerLeft}>
-            <span className={styles.secondRarity}>{secondRarity}</span>
+            <span className={styles.secondRarity} style={{ color: getRarityColor(secondRarity) }}>
+              {secondRarity}
+            </span>
             <span className={styles.separator}>|</span>
             <span className={styles.category}>{secondCategory}</span>
           </div>

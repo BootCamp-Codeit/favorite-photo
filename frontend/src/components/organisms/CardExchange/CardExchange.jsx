@@ -4,6 +4,7 @@ import originalStyles from '../CardOriginal/CardOriginal.module.css';
 import Image from 'next/image';
 import Label from '../../atoms/Label/Label';
 import { ButtonPrimary, ButtonSecondary, ResponsiveButton } from '@/components/atoms/Button';
+import { getRarityColor } from '@/constants/rarityColors';
 
 export default function CardExchange({
   title,
@@ -37,7 +38,9 @@ export default function CardExchange({
         {/* Metadata */}
         <div className={styles.metadata}>
           <div className={styles.metadataLeft}>
-            <Label className={styles.rarity}>{rarity}</Label>
+            <Label className={styles.rarity} style={{ color: getRarityColor(rarity) }}>
+              {rarity}
+            </Label>
             <Label className={styles.separator}>|</Label>
             <Label className={styles.category}>{category}</Label>
             <Label className={styles.priceInfo}>{price} 에 구매</Label>
